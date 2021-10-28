@@ -3,7 +3,6 @@
 namespace SMW\Connection;
 
 use RuntimeException;
-use SMW\SetupCheck;
 
 /**
  * @license GNU GPL v2+
@@ -83,23 +82,7 @@ class ConnectionManager {
 		if ( defined( 'SMW_VERSION' ) && defined( 'SMW_EXTENSION_LOADED' ) ) {
 			return true;
 		}
-
-		// #4150
-		// If `SMW_VERSION` is not defined then it means someone tried to
-		// establish a connection via SMW despite the fact that SMW wasn't setup
-		// correctly.
-		$setupCheck = SetupCheck::newFromDefaults();
-
-		if ( !$setupCheck->hasError() ) {
-			return true;
-		}
-
-		// Allow to figure out which program caused the issue
-		$setupCheck->setTraceString(
-			( new RuntimeException() )->getTraceAsString()
-		);
-
-		return $setupCheck->showErrorAndAbort( $setupCheck->isCli() );
+		return false;
 	}
 
 }
