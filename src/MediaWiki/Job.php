@@ -222,9 +222,7 @@ abstract class Job extends MediaWikiJob {
 	 * Special:RunJobs as it can cause the script to timeout.
 	 */
 	public function waitOnCommandLineMode() {
-		// We run jobs via Special:RunJobs and even if we didn't the same timeout would apply with the redis-based jobrunner.
-		return false;
-/*
+
 		if ( !$this->hasParameter( 'waitOnCommandLine' ) || Site::isCommandLineMode() ) {
 			return false;
 		}
@@ -239,7 +237,6 @@ abstract class Job extends MediaWikiJob {
 		$job->insert();
 
 		return true;
-*/
 	}
 
 	protected function getJobQueue() {
