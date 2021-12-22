@@ -164,12 +164,16 @@ class ContentParser {
 				$this->parserOutput = $contentRenderer->getParserOutput(
 					$content,
 					$this->getTitle(),
-					$revision->getId()
+					$revision->getId(),
+					null,
+					true
 				);
 			} else {
 				$this->parserOutput = $content->getParserOutput(
 					$this->getTitle(),
-					$revision->getId()
+					$revision->getId(),
+					null,
+					true
 				);
 			}
 		} catch( \MWUnknownContentModelException $e ) {
