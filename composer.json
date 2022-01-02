@@ -74,15 +74,13 @@
 	"autoload": {
 		"psr-4": {
 			"SMW\\": "src/",
-			"SMW\\Maintenance\\": "maintenance/",
-			"SMW\\Tests\\": "tests/phpunit/"
+			"SMW\\Maintenance\\": "maintenance/"
 		},
 		"files" : [
 			"SemanticMediaWiki.php"
 		],
 		"classmap" : [
-			"includes/",
-			"tests/phpunit/includes/"
+			"includes/"
 		]
 	},
 	"config": {
