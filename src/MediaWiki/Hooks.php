@@ -182,6 +182,46 @@ class Hooks {
 	}
 
 	/**
+	 * CanonicalNamespaces initialization
+	 *
+	 * @note According to T104954 registration via wgExtensionFunctions can be
+	 * too late and should happen before that in case RequestContext::getLanguage
+	 * invokes Language::getNamespaces before the `wgExtensionFunctions` execution.
+	 *
+	 * @see https://phabricator.wikimedia.org/T104954#2391291
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
+	 * @Bug 34383
+	 */
+	public static function onCanonicalNamespaces( array &$namespaces ) {
+
+		NamespaceManager::initCanonicalNamespaces(
+			$namespaces
+		);
+
+		return true;
+	}
+
+	/**
+	 * Called when ApiMain has finished initializing its module manager. Can
+	 * be used to conditionally register API modules.
+	 *
+	 * #2813
+	 */
+	public static function onApiModuleManager( $moduleManager ) {
+
+		$apiModuleManager = new ApiModuleManager();
+		$apiModuleManager->setOptions(
+			[
+				'SMW_EXTENSION_LOADED' => defined( 'SMW_EXTENSION_LOADED' )
+			]
+		);
+
+		$apiModuleManager->process( $moduleManager );
+
+		return true;
+	}
+
+	/**
 	 * @since 3.0
 	 *
 	 * @param array &$vars
@@ -194,70 +234,6 @@ class Hooks {
 		if ( defined( 'SMW_EXTENSION_LOADED' ) ) {
 			unset( $vars['wgHooks']['BeforePageDisplay']['smw-extension-check'] );
 		}
-
-		$vars['wgContentHandlers'][CONTENT_MODEL_SMW_SCHEMA] = 'SMW\MediaWiki\Content\SchemaContentHandler';
-
-		/**
-		 * CanonicalNamespaces initialization
-		 *
-		 * @note According to T104954 registration via wgExtensionFunctions can be
-		 * too late and should happen before that in case RequestContext::getLanguage
-		 * invokes Language::getNamespaces before the `wgExtensionFunctions` execution.
-		 *
-		 * @see https://phabricator.wikimedia.org/T104954#2391291
-		 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
-		 * @Bug 34383
-		 */
-		$vars['wgHooks']['CanonicalNamespaces'][] = function( array &$namespaces ) {
-
-			NamespaceManager::initCanonicalNamespaces(
-				$namespaces
-			);
-
-			return true;
-		};
-
-		/**
-		 * To add to or remove pages from the special page list. This array has
-		 * the same structure as $wgSpecialPages.
-		 *
-		 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialPage_initList
-		 *
-		 * #2813
-		 */
-		$vars['wgHooks']['SpecialPage_initList'][] = function( array &$specialPages ) {
-
-			$specialPageList = new SpecialPageList();
-			$specialPageList->setOptions(
-				[
-					'SMW_EXTENSION_LOADED' => defined( 'SMW_EXTENSION_LOADED' )
-				]
-			);
-
-			$specialPageList->process( $specialPages );
-
-			return true;
-		};
-
-		/**
-		 * Called when ApiMain has finished initializing its module manager. Can
-		 * be used to conditionally register API modules.
-		 *
-		 * #2813
-		 */
-		$vars['wgHooks']['ApiMain::moduleManager'][] = function( $moduleManager ) {
-
-			$apiModuleManager = new ApiModuleManager();
-			$apiModuleManager->setOptions(
-				[
-					'SMW_EXTENSION_LOADED' => defined( 'SMW_EXTENSION_LOADED' )
-				]
-			);
-
-			$apiModuleManager->process( $moduleManager );
-
-			return true;
-		};
 	}
 
 	private function registerHandlers() {
