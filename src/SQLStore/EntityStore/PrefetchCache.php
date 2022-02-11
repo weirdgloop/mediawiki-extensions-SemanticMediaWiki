@@ -156,6 +156,8 @@ class PrefetchCache {
 			$subject->getSubobjectName(),
 			true
 		);
+		// WGL
+		wfDebugLog( 'wgl-smw', __METHOD__ . ": ($sid,{$subject->getId()})" );
 
 		if ( !isset( $this->cache[$key][$sid] ) ) {
 			return [];
