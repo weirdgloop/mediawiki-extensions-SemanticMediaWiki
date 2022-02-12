@@ -259,9 +259,6 @@ class EntityLookup implements IEntityLookup {
 				true
 			);
 
-			// WGL - Logging to determine if getSMWPageID()/getSMWPageIDandSort() is always needed.
-			wfDebugLog( 'wgl-smw', __METHOD__ . ": ($sid,{$subject->getId()}) " . ($property->getKey() == '_SKEY') );
-
 			if ( $sid == 0 ) {
 				$result = [];
 			} elseif ( $property->getKey() == '_SKEY' ) {
