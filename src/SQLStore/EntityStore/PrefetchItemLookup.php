@@ -231,6 +231,9 @@ class PrefetchItemLookup {
 				true
 			);
 
+			// WGL - Logging to determine if getSMWPageID() is always needed.
+			wfDebugLog( 'wgl-smw', __METHOD__ . ": ($sid,{$subject->getId()})" );
+
 			if ( $sid == 0 ) {
 				continue;
 			}
