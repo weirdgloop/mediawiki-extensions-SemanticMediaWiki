@@ -149,6 +149,7 @@ class PrefetchCache {
 
 		$key = $this->makeCacheKey( $property, $requestOptions );
 
+		// WGL - Caching improvement from cook.
 		if ( $subject->getId() !== 0 ) {
 			$sid = $subject->getId();
 		} else {
