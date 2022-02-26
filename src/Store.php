@@ -257,7 +257,8 @@ abstract class Store implements QueryEngine {
 		$pageUpdater->markAsPending();
 		$pageUpdater->setOrigin( __METHOD__ );
 
-		$pageUpdater->doPurgeParserCache();
+		// WGL - Avoid unneeded parser cache purge. If this breaks things, blame cook.
+		//$pageUpdater->doPurgeParserCache();
 		$pageUpdater->doPurgeHtmlCache();
 		$pageUpdater->pushUpdate();
 	}
