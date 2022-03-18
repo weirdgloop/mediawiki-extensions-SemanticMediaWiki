@@ -1,6 +1,6 @@
 # Semantic MediaWiki 4.0.0
 
-Not released yet - under development
+Released on January 18, 2022.
 
 ## Summary
 
@@ -11,27 +11,29 @@ above is not supported.
 
 ## Compatibility
 
-* Dropped support for MediaWiki older than 1.35
-* Dropped support for PHP older than 7.4
-* Improved support for MediaWiki 1.35
 * Added support for MediaWiki 1.36 and MediaWiki 1.37
 * Improved compatibility with MediaWiki 1.38, though this version still has many issues
+* Improved support for MediaWiki 1.35
+* Dropped support for MediaWiki older than 1.35
+* Dropped support for PHP older than 7.4
 
 For more detailed information, see the [compatibility matrix](../COMPATIBILITY.md#compatibility).
 
 ## Upgrading
 
-Calling `wfLoadExtension` is now required in `LocalSettings.php`. Example:
+**Calling `wfLoadExtension` is now required in the "LocalSettings.php" file**. Example:
 
-```php
+```
 wfLoadExtension( 'SemanticMediaWiki' );
+```
+```
 enableSemantics( 'example.org' );
 ```
 
-There is no need to run `update.php` or any of the rebuild data scripts.
+There is no need to run the "update.php" maintenance script or any of the rebuild data scripts.
 
-When a triplestore is used with the SPARQL feature `SMW_SPARQL_QF_COLLATION`, the script
-`maintenance/updateEntityCollation.php` must be run (the collation sort key algorithm was changed).
+When a triplestore is used with the SPARQL feature `SMW_SPARQL_QF_COLLATION`, the "updateEntityCollation.php"
+maintenance script must be run (the collation sort key algorithm was changed).
 
 ## New features
 
