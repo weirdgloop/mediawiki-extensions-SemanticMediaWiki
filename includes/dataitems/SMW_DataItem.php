@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\Json\JsonUnserializable;
-use MediaWiki\Json\JsonUnserializer;
 use SMW\Options;
 
 /**
@@ -29,7 +27,7 @@ use SMW\Options;
  *
  * @ingroup SMWDataItems
  */
-abstract class SMWDataItem implements JsonUnserializable {
+abstract class SMWDataItem {
 
 	/// Data item ID that can be used to indicate that no data item class is appropriate
 	const TYPE_NOTYPE    = 0;
@@ -242,37 +240,6 @@ abstract class SMWDataItem implements JsonUnserializable {
 		}
 
 		return $default;
-	}
-
-	/**
-	 * Implements \JsonSerializable.
-	 * 
-	 * @since 4.0.0
-	 *
-	 * @return array
-	 */
-	public function jsonSerialize() {
-		return [
-			'options' => $this->options ? $this->options->jsonSerialize() : null,
-			'value' => $this->getSerialization(),
-			'_type_' => get_class( $this ),
-		];
-	}
-
-	/**
-	 * Implements JsonUnserializable.
-	 * 
-	 * @since 4.0.0
-	 *
-	 * @param JsonUnserializer $unserializer Unserializer
-	 * @param array $json JSON to be unserialized
-	 *
-	 * @return self
-	 */
-	public static function newFromJsonArray( JsonUnserializer $unserializer, array $json ) {
-		$obj = static::doUnserialize( $json['value'] );
-		$obj->options = $json['options'] ? $unserializer->unserialize( $json['options'] ) : null;
-		return $obj;
 	}
 
 }

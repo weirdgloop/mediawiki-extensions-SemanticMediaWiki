@@ -2,8 +2,6 @@
 
 namespace SMW\DataModel;
 
-use MediaWiki\Json\JsonUnserializable;
-use MediaWiki\Json\JsonUnserializer;
 use SMW\DIProperty;
 use SMW\DIWikiPage;
 use SMW\Exception\SubSemanticDataException;
@@ -22,7 +20,7 @@ use SMW\SemanticData;
  * @author Jeroen De Dauw
  * @author mwjames
  */
-class SubSemanticData implements JsonUnserializable {
+class SubSemanticData {
 
 	/**
 	 * States whether repeated values should be avoided. Not needing
@@ -268,42 +266,6 @@ class SubSemanticData implements JsonUnserializable {
 
 		$semanticData->clearSubSemanticData();
 		$this->subSemanticData[$subobjectName] = $semanticData;
-	}
-
-	/**
-	 * Implements \JsonSerializable.
-	 * 
-	 * @since 4.0.0
-	 *
-	 * @return array
-	 */
-	public function jsonSerialize() {
-		return [
-			'noDuplicates' => $this->noDuplicates,
-			'subject' => $this->subject->jsonSerialize(),
-			'subSemanticData' => array_map( function( $x ) {
-					return $x->jsonSerialize();
-				}, $this->subSemanticData ),
-			'subContainerMaxDepth' => $this->subContainerMaxDepth,
-			'_type_' => get_class( $this ),
-		];
-	}
-
-	/**
-	 * Implements JsonUnserializable.
-	 * 
-	 * @since 4.0.0
-	 *
-	 * @param JsonUnserializer $unserializer Unserializer
-	 * @param array $json JSON to be unserialized
-	 *
-	 * @return self
-	 */
-	public static function newFromJsonArray( JsonUnserializer $unserializer, array $json ) {
-		$obj = new self( $unserializer->unserialize( $json['subject'] ), $json['noDuplicates'] );
-		$obj->subSemanticData = $unserializer->unserializeArray( $json['subSemanticData'] );
-		$obj->subContainerMaxDepth = $json['subContainerMaxDepth'];
-		return $obj;
 	}
 
 }
