@@ -149,13 +149,18 @@ class PrefetchCache {
 
 		$key = $this->makeCacheKey( $property, $requestOptions );
 
-		$sid = $this->store->getObjectIds()->getSMWPageID(
-			$subject->getDBkey(),
-			$subject->getNamespace(),
-			$subject->getInterwiki(),
-			$subject->getSubobjectName(),
-			true
-		);
+		// WGL - Caching improvement from cook.
+		if ( $subject->getId() !== 0 ) {
+			$sid = $subject->getId();
+		} else {
+			$sid = $this->store->getObjectIds()->getSMWPageID(
+				$subject->getDBkey(),
+				$subject->getNamespace(),
+				$subject->getInterwiki(),
+				$subject->getSubobjectName(),
+				true
+			);
+		}
 
 		if ( !isset( $this->cache[$key][$sid] ) ) {
 			return [];
