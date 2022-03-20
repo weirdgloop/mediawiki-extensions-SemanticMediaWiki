@@ -87,10 +87,11 @@ class ConceptPage extends Page {
 		}
 
 		// Make navigation point to the result list.
-		$this->mTitle->setFragment( '#smw-result' );
+		$title = $this->getTitle();
+		$title->setFragment( '#smw-result' );
 		$isRTL = $context->getLanguage()->isRTL();
 
-		$titleText = htmlspecialchars( $this->mTitle->getText() );
+		$titleText = htmlspecialchars( $title->getText() );
 		$resultCount = count( $diWikiPages );
 
 		$limit = $request->getVal( 'limit', $this->getOption( 'pagingLimit' ) );
@@ -112,7 +113,7 @@ class ConceptPage extends Page {
 				[
 					'class' => 'clearfix'
 				],
-				Pager::pagination( $this->mTitle, $limit, $offset, $resultCount, $query + [ '_target' => '#smw-result' ] )
+				Pager::pagination( $title, $limit, $offset, $resultCount, $query + [ '_target' => '#smw-result' ] )
 			) . Html::rawElement(
 				'div',
 				[
@@ -130,7 +131,7 @@ class ConceptPage extends Page {
 			$isRTL
 		);
 
-		if ( $this->mTitle->exists() ) {
+		if ( $title->exists() ) {
 
 			$listBuilder = new ListBuilder(
 				$store
