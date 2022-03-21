@@ -151,8 +151,6 @@ class Installer implements MessageReporter {
 		$timer->keys = [
 			'create-tables' => 'Create (or checking) table(s)',
 			'post-creation' => 'Post-creation examination',
-			'table-optimization' => 'Table optimization',
-			'supplement-jobs' => 'Supplement jobs',
 			'hook-execution' => 'AfterCreateTablesComplete (Hook)'
 		];
 
@@ -236,27 +234,9 @@ class Installer implements MessageReporter {
 		$this->setupFile->setMaintenanceMode( [ 'post-creation' => 40 ] );
 		$this->tableBuildExaminer->checkOnPostCreation( $this->tableBuilder );
 
-		$timer->stop( 'post-creation' )->new( 'table-optimization' );
-
-		$this->messageReporter->reportMessage(
-			$this->cliMsgFormatter->section( 'Table optimization' ) . "\n"
-		);
-
-		$this->setupFile->setMaintenanceMode( [ 'table-optimization' => 60 ] );
-		$this->runTableOptimization();
-
-		$timer->stop( 'table-optimization' )->new( 'supplement-jobs' );
-
-		$this->messageReporter->reportMessage(
-			$this->cliMsgFormatter->section( 'Supplement jobs' ) . "\n"
-		);
-
-		$this->setupFile->setMaintenanceMode( [ 'supplement-jobs' => 80 ] );
-		$this->addSupplementJobs();
-
 		$this->setupFile->finalize();
 
-		$timer->stop( 'supplement-jobs' )->new( 'hook-execution' );
+		$timer->stop( 'post-creation' )->new( 'hook-execution' );
 
 		$this->messageReporter->reportMessage(
 			$this->cliMsgFormatter->section( 'AfterCreateTablesComplete (Hook)' )
