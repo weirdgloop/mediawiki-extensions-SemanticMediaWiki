@@ -91,6 +91,7 @@ class BeforePageDisplay implements HookListener {
 			$outputPage->prependHTML( $this->createIncompleteSetupTaskNotification( $title ) );
 		}
 
+		/* WGL - Avoid bots scraping ExportRDF by not advertising it in the first place.
 		// Add export link to the head
 		if ( $title instanceof Title && !$title->isSpecialPage() ) {
 			$link['rel']   = 'alternate';
@@ -99,6 +100,7 @@ class BeforePageDisplay implements HookListener {
 			$link['href']  = SpecialPage::getTitleFor( 'ExportRDF', $title->getPrefixedText() )->getLocalUrl( 'xmlmime=rdf' );
 			$outputPage->addLink( $link );
 		}
+		*/
 
 		$request = $skin->getContext()->getRequest();
 
