@@ -47,7 +47,7 @@ use SMW\MediaWiki\Hooks\RejectParserCacheValue;
 use SMW\MediaWiki\Hooks\ResourceLoaderGetConfigVars;
 use SMW\MediaWiki\Hooks\SidebarBeforeOutput;
 use SMW\MediaWiki\Hooks\SkinAfterContent;
-use SMW\MediaWiki\Hooks\SkinTemplateNavigation;
+use SMW\MediaWiki\Hooks\SkinTemplateNavigationUniversal;
 use SMW\MediaWiki\Hooks\SpecialSearchResultsPrepend;
 use SMW\MediaWiki\Hooks\SpecialStatsAddExtra;
 use SMW\MediaWiki\Hooks\TitleIsAlwaysKnown;
@@ -276,7 +276,7 @@ class Hooks {
 			'ResourceLoaderGetConfigVars' => [ $this, 'onResourceLoaderGetConfigVars' ],
 			'GetPreferences' => [ $this, 'onGetPreferences' ],
 			'PersonalUrls' => [ $this, 'onPersonalUrls' ],
-			'SkinTemplateNavigation' => [ $this, 'onSkinTemplateNavigation' ],
+			'SkinTemplateNavigation::Universal' => [ $this, 'onSkinTemplateNavigationUniversal' ],
 			'SidebarBeforeOutput' => [ $this, 'onSidebarBeforeOutput' ],
 			'LoadExtensionSchemaUpdates' => [ $this, 'onLoadExtensionSchemaUpdates' ],
 
@@ -1007,16 +1007,16 @@ class Hooks {
 	}
 
 	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation::Universal
 	 */
-	public function onSkinTemplateNavigation( &$skinTemplate, &$links ) {
+	public function onSkinTemplateNavigationUniversal( &$skinTemplate, &$links ) {
 
-		$skinTemplateNavigation = new SkinTemplateNavigation(
+		$skinTemplateNavigationUniversal = new SkinTemplateNavigationUniversal(
 			$skinTemplate,
 			$links
 		);
 
-		return $skinTemplateNavigation->process();
+		return $skinTemplateNavigationUniversal->process();
 	}
 
 	/**
