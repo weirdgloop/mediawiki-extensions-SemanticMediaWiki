@@ -658,16 +658,3 @@ display: inline-block;
 		display: none;
 	}
 }
-
-.skin-chameleon .autocomplete-arrow {
-	background-position-y: 1px;
-	padding: 2px;
-}
-
-.skin-chameleon .autocomplete-loading {
-	padding: 2px;
-}
-
-.skin-chameleon .smw-ask-sort-input select, .skin-chameleon .smw-ask-options-list select {
-	padding: 0.25em;
-}
