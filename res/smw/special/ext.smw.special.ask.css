@@ -398,14 +398,8 @@ display: inline-block;
 	margin-top: 5px;
 }
 
-.options-list .smw-property-input {
-}
-
 .smw-ask-sort-input .autocomplete-arrow, .smw-table-cell .autocomplete-arrow {
 	background-position-y: 0px;
-}
-
-.options-list .smw-table-cell .autocomplete-arrow {
 }
 
 .smw-ask-sort-input .autocomplete-loading {
@@ -415,9 +409,6 @@ display: inline-block;
 .smw-table-cell .autocomplete-loading {
 	vertical-align: unset;
 	padding: 4px;
-}
-
-.options-list .smw-table-cell .autocomplete-loading {
 }
 
 .smw-table-cell .mw-ui-input.autocomplete-loading {

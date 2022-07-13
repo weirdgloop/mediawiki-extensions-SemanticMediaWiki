@@ -327,7 +327,3 @@ input:checked ~ .smw-indicator-accordion-tab-content {
   max-height: 100vh;
   padding: 0.8em;
 }
-
-.plain input:checked ~ .smw-indicator-accordion-tab-content {
-  /* border-bottom: 1px solid #eee; */
-}

@@ -1124,13 +1124,6 @@ a.smw-ask-action-btn-dblue:focus {
 }
 
 /**
- * Responsive settings (#see smw.table.css)
- */
-@media screen and (max-width: 800px) {
-
-}
-
-/**
  * JSON
  */
 .mw-json .value, .mw-json-single-value {
