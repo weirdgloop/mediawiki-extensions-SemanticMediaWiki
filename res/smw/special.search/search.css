@@ -231,10 +231,6 @@
     margin-bottom: 0.5em;
 }
 
-#smw-search-synatx-list, #smw-search-sort-list {
-    /* font-size: smaller; */
-}
-
 #smw-search-synatx-list code {
     background-color: #5e9dc82e;
     border: 1px solid #5e9dc84a;
