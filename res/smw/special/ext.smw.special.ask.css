@@ -473,7 +473,7 @@ display: inline-block;
 	max-height: 0;
 	padding: 0;
 	margin: 0 auto;
-	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 #options-toggle:checked + #options-list .options-parameter-list {
@@ -502,7 +502,7 @@ display: inline-block;
 	max-height: 0;
 	padding: 0;
 	margin: 0 auto;
-	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 .options-parameter-list-plain:after {

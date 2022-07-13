@@ -52,10 +52,7 @@
  /* margin: 88px auto; */
   position: relative;
   font-size: 3px;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
   margin-right: 10px;
   margin-top: 10px;
