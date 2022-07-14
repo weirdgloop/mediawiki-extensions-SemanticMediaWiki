@@ -32,13 +32,18 @@ return [
 	'ext.smw.style' => $moduleTemplate + [
 		'styles' => [
 			'smw/ext.smw.css',
-			'smw/ext.smw.skin.css',
 			'smw/ext.smw.dropdown.css',
 			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
 			// WGL - Factbox is disabled by us, so exclude the CSS as well.
 			//'smw/factbox/smw.factbox.css',
 			'smw/smw.indicators.css',
+		],
+		'skinStyles' => [
+			'vector' => [
+				'smw/ext.smw.skin.css',
+				//'smw/factbox/smw.factbox.skin.css'
+			],
 		],
 		'position' => 'top',
 		'targets' => [ 'mobile', 'desktop' ]

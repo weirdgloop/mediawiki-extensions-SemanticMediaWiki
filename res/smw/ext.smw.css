@@ -771,11 +771,6 @@ label.smw-form-checkbox {
 	background-position-x:6px;
 }
 
-.skin-vector input#smw-property-input.autocomplete-suggestions {
-	height: 1.15em;
-	padding: 2px 2px;
-}
-
 .smw-breadcrumb-link {
 	color: #7d7d7d;
 	font-size: 84%;
