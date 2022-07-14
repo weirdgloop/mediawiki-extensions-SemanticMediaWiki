@@ -36,9 +36,9 @@ return [
 			'smw/ext.smw.dropdown.css',
 			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
-			'smw/factbox/smw.factbox.css',
+			// WGL - Factbox is disabled by us, so exclude the CSS as well.
+			//'smw/factbox/smw.factbox.css',
 			'smw/smw.indicators.css',
-			'smw/smw.jsonview.css'
 		],
 		'position' => 'top',
 		'targets' => [ 'mobile', 'desktop' ]
