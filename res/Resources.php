@@ -128,7 +128,7 @@ return [
 	// jStorage was added in MW 1.20
 	'ext.jquery.jStorage' => $moduleTemplate + [
 		'scripts' => 'jquery/jquery.jstorage.js',
-		'dependencies' => version_compare( MW_VERSION, '1.29', '<' ) ? 'json' : [],
+		'dependencies' => [],
 	],
 
 	// md5 hash key generator
@@ -200,44 +200,12 @@ return [
 		'targets' => [ 'mobile', 'desktop' ]
 	],
 
-	// Tooltip qtip2 resources
-	'ext.jquery.qtip.styles' => $moduleTemplate + [
-		'styles' => 'jquery/jquery.qtip.css',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
-	// Tooltip qtip2 resources
-	'ext.jquery.qtip' => $moduleTemplate + [
-		'scripts' => 'jquery/jquery.qtip.js',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
 	// Tooltip
 	'ext.smw.tooltip.styles' => $moduleTemplate + [
 		'styles' => [
 			'smw/util/ext.smw.util.tooltip.css'
 		],
 		'position' => 'top',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
-	// Tooltip
-	'ext.smw.tooltip.old' => $moduleTemplate + [
-		'scripts' => 'smw/util/ext.smw.util.tooltip.js',
-		'dependencies' => [
-			'ext.smw.tooltip.styles',
-			'ext.smw',
-			'ext.jquery.qtip'
-		],
-		'messages' => [
-			'smw-ui-tooltip-title-property',
-			'smw-ui-tooltip-title-quantity',
-			'smw-ui-tooltip-title-info',
-			'smw-ui-tooltip-title-service',
-			'smw-ui-tooltip-title-warning',
-			'smw-ui-tooltip-title-parameter',
-			'smw-ui-tooltip-title-event',
-		],
 		'targets' => [ 'mobile', 'desktop' ]
 	],
 
@@ -273,9 +241,9 @@ return [
 			'smw-purge-update-dependencies'
 		],
 		'position' => 'top',
-		'dependencies' => array_merge( [
+		'dependencies' => [
 			'mediawiki.api',
-		], version_compare( MW_VERSION, '1.35', '<' ) ? [ 'mediawiki.notify' ] : [] ),
+		],
 		'targets' => [
 			'mobile',
 			'desktop'
