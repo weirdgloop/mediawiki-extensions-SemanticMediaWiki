@@ -33,10 +33,7 @@ return [
 		'styles' => [
 			'smw/ext.smw.css',
 			'smw/ext.smw.skin.css',
-			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
-			// WGL - Factbox is disabled by us, so exclude the CSS as well.
-			//'smw/factbox/smw.factbox.css',
 			// WGL - Disabled by us.
 			//'smw/smw.indicators.css',
 		],
@@ -664,6 +661,17 @@ return [
 		'styles' => [
 			'smw/content/smw.schema.css',
 			'smw/ext.smw.table.css'
+		],
+		'position' => 'top',
+		'targets' => [
+			'mobile',
+			'desktop'
+		]
+	],
+
+	'smw.factbox.styles' => $moduleTemplate + [
+		'styles' => [
+			'smw/factbox/smw.factbox.css'
 		],
 		'position' => 'top',
 		'targets' => [
