@@ -38,7 +38,8 @@ return [
 			'smw/ext.smw.tabs.css',
 			// WGL - Factbox is disabled by us, so exclude the CSS as well.
 			//'smw/factbox/smw.factbox.css',
-			'smw/smw.indicators.css',
+			// WGL - Disabled by us.
+			//'smw/smw.indicators.css',
 		],
 		'position' => 'top',
 		'targets' => [ 'mobile', 'desktop' ]

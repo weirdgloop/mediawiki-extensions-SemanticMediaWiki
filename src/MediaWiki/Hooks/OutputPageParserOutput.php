@@ -90,14 +90,17 @@ class OutputPageParserOutput implements HookListener {
 			'uselang' => $request->getVal( 'uselang' ),
 		];
 
+		/* WGL - Disable attaching indicators as we don't show them.
 		if (
 			$title->exists() &&
 			$this->indicatorRegistry !== null &&
 			$this->indicatorRegistry->hasIndicator( $title, $this->permissionExaminer, $options ) ) {
 			$this->indicatorRegistry->attachIndicators( $outputPage );
 		}
+		*/
 
-		$this->addFactbox( $outputPage, $parserOutput );
+		// WGL- Disable factbox processing as we don't show them.
+		//$this->addFactbox( $outputPage, $parserOutput );
 		$this->addPostProc( $title, $outputPage, $parserOutput );
 	}
 
