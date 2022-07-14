@@ -244,7 +244,7 @@
 .smw-ui-input-filter input {
 	all: initial !important;
 	border :0px solid #ddd !important;
-	padding: .42em .55em .35em .55em !important;
+	padding: .25em .55em .25em .55em !important;
 	border-top-left-radius: .0em !important;
 	border-bottom-left-radius: .0em !important;
 	outline: none !important;
