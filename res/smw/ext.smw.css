@@ -102,8 +102,7 @@
 	display:none;
 }
 
-span.smwbuiltin,
-span.smwttactiveinline span.smwbuiltin {
+span.smwbuiltin {
 	font-style: italic;
 }
 
