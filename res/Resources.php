@@ -33,7 +33,6 @@ return [
 		'styles' => [
 			'smw/ext.smw.css',
 			'smw/ext.smw.skin.css',
-			'smw/ext.smw.dropdown.css',
 			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
 			// WGL - Factbox is disabled by us, so exclude the CSS as well.
@@ -559,6 +558,7 @@ return [
 			'smw/printer/ext.smw.tableprinter.js'
 		],
 		'styles'   => [
+			'smw/ext.smw.dropdown.css',
 			'smw/printer/ext.smw.tableprinter.css',
 			'smw/printer/ext.smw.tableprinter.skin.css'
 		],
@@ -591,6 +591,7 @@ return [
 
 	'smw.tableprinter.datatable.styles' => $moduleTemplate + [
 		'styles'   => [
+			'smw/ext.smw.dropdown.css',
 			'smw/printer/ext.smw.tableprinter.css',
 			'smw/printer/ext.smw.tableprinter.skin.css'
 		],
