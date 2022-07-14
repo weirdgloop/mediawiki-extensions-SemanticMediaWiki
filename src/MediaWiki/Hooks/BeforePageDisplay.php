@@ -66,25 +66,30 @@ class BeforePageDisplay implements HookListener {
 		$title = $outputPage->getTitle();
 		$user = $outputPage->getUser();
 
-		// MW 1.26 / T107399 / Async RL causes style delay
-		$outputPage->addModuleStyles(
-			[
-				'ext.smw.style',
-				'ext.smw.tooltip.styles'
-			]
-		);
+		// WGL - Only add SMW styles on relevant namespaces. Only possible because indicators are disabled.
+		if ( $title->getNamespace() >= SMW_NS_PROPERTY && $title->getNamespace() <= SMW_NS_RULE_TALK ) {
+			// MW 1.26 / T107399 / Async RL causes style delay
+			$outputPage->addModuleStyles(
+				[
+					'ext.smw.style',
+					'ext.smw.tooltip.styles'
+				]
+			);
+
+			// #2726
+			if ( $user->getOption( 'smw-prefs-general-options-suggester-textinput' ) ) {
+				$outputPage->addModules( 'ext.smw.suggester.textInput' );
+			}
+		}
 
 		if ( $title->getNamespace() === NS_SPECIAL ) {
 			$outputPage->addModuleStyles(
 				[
+					'ext.smw.style',
+					'ext.smw.tooltip.styles',
 					'ext.smw.special.styles'
 				]
 			);
-		}
-
-		// #2726
-		if ( $user->getOption( 'smw-prefs-general-options-suggester-textinput' ) ) {
-			$outputPage->addModules( 'ext.smw.suggester.textInput' );
 		}
 
 		if ( $this->getOption( 'incomplete_tasks', [] ) !== [] ) {
