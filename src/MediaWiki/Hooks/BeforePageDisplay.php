@@ -90,6 +90,11 @@ class BeforePageDisplay implements HookListener {
 					'ext.smw.special.styles'
 				]
 			);
+
+			// #2726
+			if ( $user->getOption( 'smw-prefs-general-options-suggester-textinput' ) ) {
+				$outputPage->addModules( 'ext.smw.suggester.textInput' );
+			}
 		}
 
 		if ( $this->getOption( 'incomplete_tasks', [] ) !== [] ) {
