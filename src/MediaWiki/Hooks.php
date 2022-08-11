@@ -157,11 +157,10 @@ class Hooks {
 	 *
 	 * @since 3.1
 	 *
-	 * @param array &$vars
 	 */
-	public static function registerExtensionCheck( array &$vars ) {
+	public static function registerExtensionCheck() {
 
-		$vars['wgHooks']['BeforePageDisplay']['smw-extension-check'] = function( $outputPage ) {
+		$GLOBALS['wgHooks']['BeforePageDisplay']['smw-extension-check'] = function( $outputPage ) {
 
 			$beforePageDisplay = new BeforePageDisplay();
 
@@ -224,15 +223,14 @@ class Hooks {
 	/**
 	 * @since 3.0
 	 *
-	 * @param array &$vars
 	 */
-	public static function registerEarly( array &$vars ) {
+	public static function registerEarly() {
 
 		// Remove the hook registered via `Hook::registerExtensionCheck` given
 		// that at this point we know the extension was loaded and hereby is
 		// available.
 		if ( defined( 'SMW_EXTENSION_LOADED' ) ) {
-			unset( $vars['wgHooks']['BeforePageDisplay']['smw-extension-check'] );
+			unset( $GLOBALS['wgHooks']['BeforePageDisplay']['smw-extension-check'] );
 		}
 	}
 
@@ -922,7 +920,7 @@ class Hooks {
 	/**
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderGetConfigVars
 	 */
-	public function onResourceLoaderGetConfigVars( &$vars ) {
+	public function onResourceLoaderGetConfigVars() {
 
 		$applicationFactory = ApplicationFactory::getInstance();
 		$settings = ApplicationFactory::getInstance()->getSettings();
@@ -935,7 +933,7 @@ class Hooks {
 			$settings->filter( ResourceLoaderGetConfigVars::OPTION_KEYS )
 		);
 
-		return $resourceLoaderGetConfigVars->process( $vars );
+		return $resourceLoaderGetConfigVars->process();
 	}
 
 	/**
