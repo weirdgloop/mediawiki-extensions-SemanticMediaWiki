@@ -156,7 +156,7 @@ class Bulk implements JsonSerializable {
 	 *
 	 * @return string
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): string|false {
 		return json_encode( $this->bulk );
 	}
 

@@ -77,7 +77,7 @@ class Compartment implements JsonSerializable, IteratorAggregate {
 	 *
 	 * @return string
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): string|false {
 		return json_encode( $this->data );
 	}
 
