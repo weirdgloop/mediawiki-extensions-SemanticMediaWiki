@@ -4,6 +4,7 @@ namespace SMW\Schema;
 
 use JsonSerializable;
 use SMW\Utils\DotArray;
+use Iterator;
 use IteratorAggregate;
 
 /**
@@ -104,7 +105,7 @@ class Compartment implements JsonSerializable, IteratorAggregate {
 	 *
 	 * @return Iterator
 	 */
-	public function getIterator() {
+	public function getIterator(): Iterator {
 
 		foreach ( $this->data as $key => $value ) {
 
