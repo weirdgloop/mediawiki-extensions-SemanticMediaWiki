@@ -74,8 +74,10 @@ final class Setup {
 	 *
 	 * @since 3.0
 	 */
-	public static function initExtension( &$vars ) {
+	public static function initExtension( array $vars ): array {
 		Hooks::registerEarly( $vars );
+
+		return $vars;
 	}
 
 	/**
@@ -94,11 +96,9 @@ final class Setup {
 
 	/**
 	 * @since 1.9
-	 *
-	 * @param array &$vars
-	 * @param string $rootDir
 	 */
-	public function init( &$vars, $rootDir ) {
+	public function init( array $vars, string $rootDir ): array {
+
 		$this->initConnectionProviders();
 		$this->initMessageCallbackHandler();
 		$this->addDefaultConfigurations( $vars, $rootDir );
@@ -111,6 +111,8 @@ final class Setup {
 		$this->registerHooks( $vars );
 
 		$this->hookDispatcher->onSetupAfterInitializationComplete( $vars );
+
+		return $vars;
 	}
 
 	private function addDefaultConfigurations( &$vars, $rootDir ) {

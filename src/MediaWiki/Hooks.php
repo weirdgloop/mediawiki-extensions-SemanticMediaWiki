@@ -435,8 +435,13 @@ class Hooks {
 			$permissionExaminer
 		);
 
+		$preferenceExaminer = $applicationFactory->newPreferenceExaminer( $outputPage->getUser() );
+
 		$outputPageParserOutput->setIndicatorRegistry(
-			$applicationFactory->create( 'IndicatorRegistry' )
+			$applicationFactory->create(
+				'IndicatorRegistry',
+				$preferenceExaminer->hasPreferenceOf( GetPreferences::SHOW_ENTITY_ISSUE_PANEL )
+			)
 		);
 
 		$outputPageParserOutput->process( $outputPage, $parserOutput );

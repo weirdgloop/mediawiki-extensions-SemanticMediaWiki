@@ -548,6 +548,8 @@
 	"smw-prefs-general-options-disable-search-info": "Desativar as informações de suporte da sintaxe na página de pesquisa padrão",
 	"smw-prefs-general-options-suggester-textinput": "Ativar o auxiliar de preenchimento para as entidades semânticas",
 	"smw-prefs-help-general-options-suggester-textinput": "Se ativado, permite usar um [https://www.semantic-mediawiki.org/wiki/Help:Input_assistance auxiliar de preenchimento] para encontrar propriedades, conceitos e categorias num contexto de entrada.",
+	"smw-prefs-general-options-show-entity-issue-panel": "Mostrar o painel de problemas de entidades",
+	"smw-prefs-help-general-options-show-entity-issue-panel": "Se ativado, executa verificações de integridade em cada página e mostra o [https://www.semantic-mediawiki.org/wiki/Help:Entity_issue_panel painel de problemas de entidades].",
 	"smw-ui-tooltip-title-property": "Propriedade",
 	"smw-ui-tooltip-title-quantity": "Conversão de unidades",
 	"smw-ui-tooltip-title-info": "Informação",
@@ -1115,5 +1117,6 @@
 	"smw-indicator-revision-mismatch": "Revisão",
 	"smw-indicator-revision-mismatch-error": "A verificação [https://www.semantic-mediawiki.org/wiki/Help:Associated_revision/Examiner revisão associada] encontrou uma falta de correspondência para esta entidade entre a revisão referenciada no MediaWiki e a que está a ser associada no MediaWiki Semântico.",
 	"smw-indicator-revision-mismatch-comment": "Uma falta de correspondência normalmente indica que um qualquer processo interrompeu a operação de armazenamento no MediaWiki Semântico. É recomendado rever os registos do servidor e procurar exceções ou outras falhas.",
-	"smw-listingcontinuesabbrev": "cont."
+	"smw-listingcontinuesabbrev": "cont.",
+	"smw-showingresults": "{{PLURAL:$1|É apresentado <strong>um</strong> resultado|São apresentados até <strong>$1</strong> resultados}} abaixo{{PLURAL:$1||, começando pelo <strong>$2</strong>º}}."
 }

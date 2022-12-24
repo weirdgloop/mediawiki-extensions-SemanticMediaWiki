@@ -4,6 +4,7 @@
 			"Als-Holder",
 			"Ameisenigel",
 			"Bjarncraft",
+			"Brettchenweber",
 			"DaSch",
 			"Das Schäfchen",
 			"Denny",
@@ -25,6 +26,7 @@
 			"Michawiki",
 			"Mirzali",
 			"MuratTheTurkish",
+			"Nadjita",
 			"Nemo bis",
 			"Omnipaedista",
 			"Pill",
@@ -577,7 +579,7 @@
 	"right-smw-patternedit": "Zulässige Textmuster anhand regulärer Ausdrücke erstellen und bearbeiten",
 	"right-smw-pageedit": "Seiten bearbeiten, die mit einem positiven Wahrheitswert für das Spezialattribut „Ist bearbeitungsgeschützt“ annotiert wurden",
 	"right-smw-schemaedit": "Seiten im Namensraum [https://www.semantic-mediawiki.org/wiki/Help:Schema „Schema“] bearbeiten (Semantic MediaWiki)",
-	"right-smw-viewjobqueuewatchlist": "Zugriff auf das die [https://www.semantic-mediawiki.org/wiki/Help:Job_queue_watchlist Anzeige zur Aufragswarteschlagen] (Semantic MediaWiki)",
+	"right-smw-viewjobqueuewatchlist": "Zugriff auf die [https://www.semantic-mediawiki.org/wiki/Help:Job_queue_watchlist Anzeige zu Auftragswarteschlangen] (Semantic MediaWiki)",
 	"right-smw-viewentityassociatedrevisionmismatch": "Auf Informationen über nicht zueinander passende Revisionen von Entitäten zugreifen (Semantic MediaWiki)",
 	"right-smw-vieweditpageinfo": "[https://www.semantic-mediawiki.org/wiki/Help:Edit_help Bearbeitungshilfe] einsehen (Semantic MediaWiki)",
 	"restriction-level-smw-pageedit": "geschützt (nur berechtigte Benutzer)",
@@ -1124,5 +1126,6 @@
 	"smw-indicator-revision-mismatch": "Revision",
 	"smw-indicator-revision-mismatch-error": "Der [https://www.semantic-mediawiki.org/wiki/Help:Associated_revision/Examiner Seitenversionsprüfung] hat beim Vergleich eine Abweichung der Seitenversionen zwischen den Datenbanken von MediaWiki und Semantic MediaWiki festgestellt.",
 	"smw-indicator-revision-mismatch-comment": "Eine Abweichung deutet normalerweise darauf hin, daß eine Softwareaufgabe zur Aktualisierung der Seitenversion, in der Datenbank von Semantic MediaWiki, unterbrochen wurde. Daher sollten die entsprechenden Logdateien des Servers auf Informationen zu möglichen Fehlern geprüft werden.",
-	"smw-listingcontinuesabbrev": "Fortsetzung"
+	"smw-listingcontinuesabbrev": "Fortsetzung",
+	"smw-showingresults": "Hier {{PLURAL:$1|ist <strong>1</strong> Ergebnis|sind <strong>$1</strong> Ergebnisse}}, beginnend mit Nummer <strong>$2</strong>."
 }

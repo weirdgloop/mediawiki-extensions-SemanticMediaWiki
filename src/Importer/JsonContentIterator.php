@@ -3,6 +3,7 @@
 namespace SMW\Importer;
 
 use ArrayIterator;
+use Iterator;
 
 /**
  * @license GNU GPL v2+
@@ -74,7 +75,7 @@ class JsonContentIterator implements ContentIterator {
 	 *
 	 * @return ArrayIterator
 	 */
-	public function getIterator(): ArrayIterator {
+	public function getIterator(): Iterator {
 		return new ArrayIterator( $this->jsonImportContentsFileDirReader->getContentList() );
 	}
 
