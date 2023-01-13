@@ -5,7 +5,6 @@ namespace SMW\Schema;
 use Iterator;
 use JsonSerializable;
 use SMW\Utils\DotArray;
-use Iterator;
 use IteratorAggregate;
 
 /**
