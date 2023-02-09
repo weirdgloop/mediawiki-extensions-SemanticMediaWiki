@@ -35,7 +35,6 @@
 
 .tippy-tooltip.light-border-theme[x-placement^=top] .tippy-roundarrow:after {
 	top: 1px;
-	-webkit-transform: rotate(180deg);
 	transform: rotate(180deg)
 }
 
@@ -74,7 +73,6 @@
 .tippy-tooltip.light-border-theme[x-placement^=left] .tippy-roundarrow:after {
 	left: 1px;
 	top: 0;
-	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg)
 }
 
@@ -95,7 +93,6 @@
 .tippy-tooltip.light-border-theme[x-placement^=right] .tippy-roundarrow:after {
 	left: -1px;
 	top: 0;
-	-webkit-transform: rotate(-90deg);
 	transform: rotate(-90deg)
 }
 
@@ -117,7 +114,6 @@
 .tippy-tooltip.light-border-theme[x-placement^=bottom] .tippy-roundarrow,
 .tippy-tooltip.light-border-theme[x-placement^=top] .tippy-arrow,
 .tippy-tooltip.light-border-theme[x-placement^=top] .tippy-roundarrow {
-	-webkit-transform: translateX(-1px);
 	transform: translateX(-1px)
 }
 
@@ -134,7 +130,6 @@
 .tippy-tooltip.light-border-theme[x-placement^=left] .tippy-roundarrow,
 .tippy-tooltip.light-border-theme[x-placement^=right] .tippy-arrow,
 .tippy-tooltip.light-border-theme[x-placement^=right] .tippy-roundarrow {
-	-webkit-transform: translateY(-1px);
 	transform: translateY(-1px)
 }
 
