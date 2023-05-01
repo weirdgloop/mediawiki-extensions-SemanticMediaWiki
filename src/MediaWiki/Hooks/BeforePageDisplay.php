@@ -66,6 +66,7 @@ class BeforePageDisplay implements HookListener {
 
 		$title = $outputPage->getTitle();
 		$user = $outputPage->getUser();
+		$userOptionsLookup = ServicesFactory::getInstance()->singleton( 'UserOptionsLookup' );
 
 		// WGL - Only add SMW styles on relevant namespaces. Only possible because indicators are disabled.
 		if ( $title->getNamespace() >= SMW_NS_PROPERTY && $title->getNamespace() <= SMW_NS_RULE_TALK ) {
@@ -78,7 +79,7 @@ class BeforePageDisplay implements HookListener {
 			);
 
 			// #2726
-			if ( $user->getOption( 'smw-prefs-general-options-suggester-textinput' ) ) {
+			if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
 				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
 			}
 		}
@@ -93,7 +94,6 @@ class BeforePageDisplay implements HookListener {
 			);
 
 			// #2726
-			$userOptionsLookup = ServicesFactory::getInstance()->singleton( 'UserOptionsLookup' );
 			if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
 				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
 			}
