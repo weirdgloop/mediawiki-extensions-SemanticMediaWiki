@@ -882,7 +882,7 @@ class Hooks {
 	public function onSpecialStatsAddExtra( &$extraStats, IContextSource $context ) {
 
 		$applicationFactory = ApplicationFactory::getInstance();
-		$context->getOutput()->addModules( 'smw.tippy' );
+		$context->getOutput()->addModules( [ 'smw.tippy' ] );
 
 		$specialStatsAddExtra = new SpecialStatsAddExtra(
 			$applicationFactory->getStore()

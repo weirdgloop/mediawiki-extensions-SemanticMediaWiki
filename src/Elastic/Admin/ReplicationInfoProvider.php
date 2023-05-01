@@ -98,7 +98,7 @@ class ReplicationInfoProvider extends InfoProviderHandler {
 
 	private function outputInfo() {
 
-		$this->outputFormatter->addModules( 'ext.smw.purge' );
+		$this->outputFormatter->addModules( [ 'ext.smw.purge' ] );
 
 		$html = Html::rawElement(
 			'div',

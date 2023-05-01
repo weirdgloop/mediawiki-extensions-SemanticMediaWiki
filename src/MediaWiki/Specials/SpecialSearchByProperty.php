@@ -41,8 +41,10 @@ class SpecialSearchByProperty extends SpecialPage {
 		$request = $this->getRequest();
 
 		$output->setPageTitle( $this->msg( 'searchbyproperty' )->text() );
-		$output->addModules( 'ext.smw.tooltip' );
-		$output->addModules( 'ext.smw.autocomplete.property' );
+		$output->addModules( [
+			'ext.smw.autocomplete.property',
+			'ext.smw.tooltip'
+		] );
 
 		list( $limit, $offset ) = $this->getLimitOffset();
 

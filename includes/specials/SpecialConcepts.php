@@ -39,7 +39,7 @@ class SpecialConcepts extends \SpecialPage {
 
 		$this->setHeaders();
 		$out = $this->getOutput();
-		$out->addModuleStyles( 'ext.smw.page.styles' );
+		$out->addModuleStyles( [ 'ext.smw.page.styles' ] );
 
 		$limit = $this->getRequest()->getVal( 'limit', 50 );
 		$offset = $this->getRequest()->getVal( 'offset', 0 );

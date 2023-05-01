@@ -199,17 +199,21 @@ class SpecialAsk extends SpecialPage {
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 
-		$out->addModuleStyles( 'ext.smw.style' );
-		$out->addModuleStyles( 'ext.smw.ask.styles' );
-		$out->addModuleStyles( 'ext.smw.table.styles' );
-		$out->addModuleStyles( 'ext.smw.page.styles' );
+		$out->addModuleStyles( [
+			'ext.smw.style',
+			'ext.smw.ask.styles',
+			'ext.smw.table.styles',
+			'ext.smw.page.styles'
+		] );
 
 		$out->addModuleStyles(
 			HtmlModal::getModuleStyles()
 		);
 
-		$out->addModules( 'ext.smw.ask' );
-		$out->addModules( 'ext.smw.autocomplete.property' );
+		$out->addModules( [
+			'ext.smw.ask',
+			'ext.smw.autocomplete.property'
+		] );
 
 		$out->addModules(
 			LinksWidget::getModules()

@@ -79,7 +79,7 @@ class BeforePageDisplay implements HookListener {
 
 			// #2726
 			if ( $user->getOption( 'smw-prefs-general-options-suggester-textinput' ) ) {
-				$outputPage->addModules( 'ext.smw.suggester.textInput' );
+				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
 			}
 		}
 
@@ -95,7 +95,7 @@ class BeforePageDisplay implements HookListener {
 			// #2726
 			$userOptionsLookup = ServicesFactory::getInstance()->singleton( 'UserOptionsLookup' );
 			if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
-				$outputPage->addModules( 'ext.smw.suggester.textInput' );
+				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
 			}
 		}
 
