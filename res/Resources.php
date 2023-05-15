@@ -826,9 +826,6 @@ return [
 			'onoi/jquery.qtip/core/jquery.qtip.js',
 			'onoi/jquery.qtip/extended/jquery.qtip.js'
 		],
-		'dependencies'  => [
-			'onoi.qtip.core'
-		],
 		'targets' => [
 			'mobile',
 			'desktop'
