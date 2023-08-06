@@ -84,6 +84,15 @@ class BeforePageDisplay implements HookListener {
 			}
 		}
 
+		// Change propagation
+		if ( $title->getNamespace() === NS_CATEGORY ) {
+			$outputPage->addModuleStyles(
+				[
+					'ext.smw.style'
+				]
+			);
+		}
+
 		if ( $title->getNamespace() === NS_SPECIAL ) {
 			$outputPage->addModuleStyles(
 				[
