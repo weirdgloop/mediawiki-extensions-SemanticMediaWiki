@@ -24,7 +24,6 @@ use SMW\DataTypeRegistry;
 use SMW\ParserFunctions\DocumentationParserFunction;
 use SMW\ParserFunctions\InfoParserFunction;
 use SMW\ParserFunctions\SectionTag;
-use SMW\SetupFile;
 use SMW\Store;
 use SMW\Options;
 use SMW\MediaWiki\Hooks\ArticleDelete;
@@ -475,14 +474,6 @@ class Hooks {
 	public function onBeforePageDisplay( &$outputPage, &$skin ) {
 
 		$beforePageDisplay = new BeforePageDisplay();
-		$setupFile = new SetupFile();
-
-		$beforePageDisplay->setOptions(
-			[
-				'incomplete_tasks' => $setupFile->findIncompleteTasks(),
-				'is_upgrade' => $setupFile->get( SetupFile::PREVIOUS_VERSION )
-			]
-		);
 
 		return $beforePageDisplay->process( $outputPage, $skin );
 	}
@@ -889,7 +880,7 @@ class Hooks {
 	public function onSpecialStatsAddExtra( &$extraStats, IContextSource $context ) {
 
 		$applicationFactory = ApplicationFactory::getInstance();
-		$context->getOutput()->addModules( 'smw.tippy' );
+		$context->getOutput()->addModules( [ 'smw.tippy' ] );
 
 		$specialStatsAddExtra = new SpecialStatsAddExtra(
 			$applicationFactory->getStore()

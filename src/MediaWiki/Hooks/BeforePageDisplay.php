@@ -66,33 +66,53 @@ class BeforePageDisplay implements HookListener {
 
 		$title = $outputPage->getTitle();
 		$user = $outputPage->getUser();
+		$userOptionsLookup = ServicesFactory::getInstance()->singleton( 'UserOptionsLookup' );
 
-		// MW 1.26 / T107399 / Async RL causes style delay
-		$outputPage->addModuleStyles(
-			[
-				'ext.smw.style',
-				'ext.smw.tooltip.styles'
-			]
-		);
-
-		if ( $title->getNamespace() === NS_SPECIAL ) {
+		// WGL - Only add SMW styles on relevant namespaces. Only possible because indicators are disabled.
+		if ( $title->getNamespace() >= SMW_NS_PROPERTY && $title->getNamespace() <= SMW_NS_RULE_TALK ) {
+			// MW 1.26 / T107399 / Async RL causes style delay
 			$outputPage->addModuleStyles(
 				[
-					'ext.smw.special.styles'
+					'ext.smw.style',
+					'ext.smw.tooltip.styles'
+				]
+			);
+
+			// #2726
+			if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
+				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
+			}
+		}
+
+		// Change propagation
+		if ( $title->getNamespace() === NS_CATEGORY ) {
+			$outputPage->addModuleStyles(
+				[
+					'ext.smw.style'
 				]
 			);
 		}
 
-		// #2726
-		$userOptionsLookup = ServicesFactory::getInstance()->singleton( 'UserOptionsLookup' );
-		if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
-			$outputPage->addModules( 'ext.smw.suggester.textInput' );
+		if ( $title->getNamespace() === NS_SPECIAL ) {
+			$outputPage->addModuleStyles(
+				[
+					'ext.smw.style',
+					'ext.smw.tooltip.styles',
+					'ext.smw.special.styles'
+				]
+			);
+
+			// #2726
+			if ( $userOptionsLookup->getOption( $user, 'smw-prefs-general-options-suggester-textinput' ) ) {
+				$outputPage->addModules( [ 'ext.smw.suggester.textInput' ] );
+			}
 		}
 
 		if ( $this->getOption( 'incomplete_tasks', [] ) !== [] ) {
 			$outputPage->prependHTML( $this->createIncompleteSetupTaskNotification( $title ) );
 		}
 
+		/* WGL - Avoid bots scraping ExportRDF by not advertising it in the first place.
 		// Add export link to the head
 		if ( $title instanceof Title && !$title->isSpecialPage() ) {
 			$link['rel']   = 'alternate';
@@ -101,6 +121,7 @@ class BeforePageDisplay implements HookListener {
 			$link['href']  = SpecialPage::getTitleFor( 'ExportRDF', $title->getPrefixedText() )->getLocalUrl( 'xmlmime=rdf' );
 			$outputPage->addLink( $link );
 		}
+		*/
 
 		$request = $skin->getContext()->getRequest();
 

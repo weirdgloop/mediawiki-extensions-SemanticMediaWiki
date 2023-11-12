@@ -129,6 +129,7 @@ class Factbox {
 		);
 
 		if ( $this->content !== '' || $this->attachments !== [] ) {
+			$this->parserData->getOutput()->addModuleStyles( self::getModuleStyles() );
 			$this->parserData->getOutput()->addModules( self::getModules() );
 			$this->parserData->pushSemanticDataToParserOutput();
 			$this->isVisible = true;
@@ -280,6 +281,19 @@ class Factbox {
 	}
 
 	/**
+	 * Returns required resource module styles
+	 *
+	 * @return array
+	 */
+	public static function getModuleStyles() {
+		return [
+			'ext.smw.style',
+			'ext.smw.table.styles',
+			'smw.factbox.styles'
+		];
+	}
+
+	/**
 	 * Returns required resource modules
 	 *
 	 * @since 1.9
@@ -288,8 +302,6 @@ class Factbox {
 	 */
 	public static function getModules() {
 		return [
-			'ext.smw.style',
-			'ext.smw.table.styles',
 			'smw.factbox'
 		];
 	}

@@ -45,19 +45,6 @@ final class Setup {
 	 * @param array $vars
 	 */
 	public static function registerExtensionCheck( &$vars ) {
-
-		$uncaughtExceptionHandler = new UncaughtExceptionHandler(
-			SetupCheck::newFromDefaults()
-		);
-
-		// Register an exception handler to fetch the "Uncaught Exception" which
-		// is can be thrown by the `ExtensionRegistry` in case `enableSemantics`
-		// and `wfLoadExtension( 'SemanticMediaWiki' )` were used simultaneously
-		// by emitting something like:
-		//
-		// "... It was attempted to load SemanticMediaWiki twice ..."
-		set_exception_handler( [ $uncaughtExceptionHandler, 'registerHandler' ] );
-
 		if ( $vars['smwgIgnoreExtensionRegistrationCheck'] ) {
 			return;
 		}
@@ -104,41 +91,13 @@ final class Setup {
 	 * @since 3.0
 	 */
 	public static function isValid( $isCli = false ) {
-		return SetupFile::isGoodSchema( $isCli );
+		return true;
 	}
 
 	/**
 	 * @since 1.9
 	 */
 	public function init( array $vars, string $rootDir ): array {
-
-		$setupFile = new SetupFile();
-		$vars = $setupFile->loadSchema( $vars );
-		Globals::replace( $vars );
-
-		$setupCheck = new SetupCheck(
-			[
-				'SMW_VERSION' => SMW_VERSION,
-				'MW_VERSION'  => MW_VERSION,
-				'wgLanguageCode' => $vars['wgLanguageCode'],
-				'smwgUpgradeKey' => $vars['smwgUpgradeKey']
-			],
-			$setupFile
-		);
-
-		if ( $setupCheck->hasError() ) {
-
-			// If classified as `ERROR_EXTENSION_LOAD` then it means `extension.json`
-			// was invoked by `wfLoadExtension( 'SemanticMediaWiki' )` at this
-			// point which we don't allow as it conflicts with the setup of
-			// namespaces and other settings hence we reclassify the error as an
-			// invalid access.
-			if ( $setupCheck->isError( SetupCheck::ERROR_EXTENSION_LOAD ) ) {
-				$setupCheck->setErrorType( SetupCheck::ERROR_EXTENSION_INVALID_ACCESS );
-			}
-
-			$setupCheck->showErrorAndAbort( $setupCheck->isCli() );
-		}
 
 		$this->initConnectionProviders();
 		$this->initMessageCallbackHandler();

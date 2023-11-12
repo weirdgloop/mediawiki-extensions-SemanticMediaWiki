@@ -1052,7 +1052,8 @@ class EntityIdManager {
 		$this->idCacheManager = $this->factory->newIdCacheManager(
 			self::POOLCACHE_ID,
 			[
-				'entity.id' => self::MAX_CACHE_SIZE,
+				// WGL - Increase entity.id cache size to 5000.
+				'entity.id' => 5000,
 				'entity.sort' => self::MAX_CACHE_SIZE,
 				'entity.lookup' => 2000,
 				'propertytable.hash' => self::MAX_CACHE_SIZE,

@@ -32,12 +32,9 @@ return [
 		'styles' => [
 			'smw/ext.smw.css',
 			'smw/ext.smw.skin.css',
-			'smw/ext.smw.dropdown.css',
-			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
-			'smw/factbox/smw.factbox.css',
-			'smw/smw.indicators.css',
-			'smw/smw.jsonview.css'
+			// WGL - Disabled by us.
+			//'smw/smw.indicators.css',
 		],
 		'position' => 'top',
 		'targets' => [ 'mobile', 'desktop' ]
@@ -127,7 +124,7 @@ return [
 	// jStorage was added in MW 1.20
 	'ext.jquery.jStorage' => $moduleTemplate + [
 		'scripts' => 'jquery/jquery.jstorage.js',
-		'dependencies' => version_compare( MW_VERSION, '1.29', '<' ) ? 'json' : [],
+		'dependencies' => [],
 	],
 
 	// md5 hash key generator
@@ -199,44 +196,12 @@ return [
 		'targets' => [ 'mobile', 'desktop' ]
 	],
 
-	// Tooltip qtip2 resources
-	'ext.jquery.qtip.styles' => $moduleTemplate + [
-		'styles' => 'jquery/jquery.qtip.css',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
-	// Tooltip qtip2 resources
-	'ext.jquery.qtip' => $moduleTemplate + [
-		'scripts' => 'jquery/jquery.qtip.js',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
 	// Tooltip
 	'ext.smw.tooltip.styles' => $moduleTemplate + [
 		'styles' => [
 			'smw/util/ext.smw.util.tooltip.css'
 		],
 		'position' => 'top',
-		'targets' => [ 'mobile', 'desktop' ]
-	],
-
-	// Tooltip
-	'ext.smw.tooltip.old' => $moduleTemplate + [
-		'scripts' => 'smw/util/ext.smw.util.tooltip.js',
-		'dependencies' => [
-			'ext.smw.tooltip.styles',
-			'ext.smw',
-			'ext.jquery.qtip'
-		],
-		'messages' => [
-			'smw-ui-tooltip-title-property',
-			'smw-ui-tooltip-title-quantity',
-			'smw-ui-tooltip-title-info',
-			'smw-ui-tooltip-title-service',
-			'smw-ui-tooltip-title-warning',
-			'smw-ui-tooltip-title-parameter',
-			'smw-ui-tooltip-title-event',
-		],
 		'targets' => [ 'mobile', 'desktop' ]
 	],
 
@@ -272,9 +237,9 @@ return [
 			'smw-purge-update-dependencies'
 		],
 		'position' => 'top',
-		'dependencies' => array_merge( [
+		'dependencies' => [
 			'mediawiki.api',
-		], version_compare( MW_VERSION, '1.35', '<' ) ? [ 'mediawiki.notify' ] : [] ),
+		],
 		'targets' => [
 			'mobile',
 			'desktop'
@@ -589,6 +554,7 @@ return [
 			'smw/printer/ext.smw.tableprinter.js'
 		],
 		'styles'   => [
+			'smw/ext.smw.dropdown.css',
 			'smw/printer/ext.smw.tableprinter.css',
 			'smw/printer/ext.smw.tableprinter.skin.css'
 		],
@@ -621,6 +587,7 @@ return [
 
 	'smw.tableprinter.datatable.styles' => $moduleTemplate + [
 		'styles'   => [
+			'smw/ext.smw.dropdown.css',
 			'smw/printer/ext.smw.tableprinter.css',
 			'smw/printer/ext.smw.tableprinter.skin.css'
 		],
@@ -693,6 +660,17 @@ return [
 		'styles' => [
 			'smw/content/smw.schema.css',
 			'smw/ext.smw.table.css'
+		],
+		'position' => 'top',
+		'targets' => [
+			'mobile',
+			'desktop'
+		]
+	],
+
+	'smw.factbox.styles' => $moduleTemplate + [
+		'styles' => [
+			'smw/factbox/smw.factbox.css'
 		],
 		'position' => 'top',
 		'targets' => [

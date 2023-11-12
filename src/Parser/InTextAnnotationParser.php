@@ -196,7 +196,8 @@ class InTextAnnotationParser {
 		$text = LinksEncoder::removeLinkObfuscation( $text );
 
 		if ( $this->isEnabledNamespace ) {
-			$this->parserData->getOutput()->addModules( $this->getModules() );
+			// WGL - Unneeded.
+			//$this->parserData->getOutput()->addModules( $this->getModules() );
 			$this->parserData->addExtraParserKey( 'userlang' );
 		}
 

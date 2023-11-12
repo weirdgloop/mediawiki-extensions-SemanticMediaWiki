@@ -88,8 +88,7 @@
 			"includes/GlobalFunctions.php"
 		],
 		"classmap" : [
-			"includes/",
-			"tests/phpunit/includes/"
+			"includes/"
 		]
 	},
 	"config": {

@@ -240,7 +240,6 @@ class updateEntityCountMap extends \Maintenance {
 				HmacSerializer::compress( $countMap )
 			);
 
-
 			$connection->upsert(
 				SQLStore::ID_AUXILIARY_TABLE,
 				[

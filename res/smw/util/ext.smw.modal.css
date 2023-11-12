@@ -60,10 +60,8 @@
     border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(27,31,35,0.25);
@@ -73,11 +71,6 @@
 }
 
 /* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
 @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
@@ -125,9 +118,6 @@
     font-weight: bold;
     border-bottom: 0px solid #a2a9b1;
     color: #fff;
-}
-
-.smw-modal-body {
 }
 
 .smw-modal-footer {

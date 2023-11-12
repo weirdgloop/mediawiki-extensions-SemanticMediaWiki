@@ -92,13 +92,6 @@ fieldset#mw-prefsection-smw-srf .htmlform-tip{
 	margin-top: 15px !important;
 }
 
-#mw-prefsection-smw-general-options.oo-ui-layout,
-#mw-prefsection-smw-extended-search-options.oo-ui-layout,
-#mw-prefsection-smw-ask-options.oo-ui-layout,
-#mw-prefsection-smw-srf.oo-ui-layout {
-	/* margin-top: 5px; */
-}
-
 #mw-prefsection-smw .oo-ui-panelLayout-padded {
 	padding-top: 0em;
 	padding-bottom: 0em;

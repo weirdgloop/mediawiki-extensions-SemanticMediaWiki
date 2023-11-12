@@ -218,6 +218,11 @@ class PrefetchItemLookup {
 		$ids = [];
 
 		foreach ( $subjects as $subject ) {
+			// WGL - Avoid $sid lookup if it will be discarded.
+			if ( $type !== $subject->getDIType() ) {
+				continue;
+			}
+
 			$sid = $idTable->getSMWPageID(
 				$subject->getDBkey(),
 				$subject->getNamespace(),
@@ -226,7 +231,7 @@ class PrefetchItemLookup {
 				true
 			);
 
-			if ( $type !== $subject->getDIType() || $sid == 0 ) {
+			if ( $sid == 0 ) {
 				continue;
 			}
 

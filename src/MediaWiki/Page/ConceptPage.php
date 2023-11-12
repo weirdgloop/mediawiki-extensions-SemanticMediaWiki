@@ -54,7 +54,7 @@ class ConceptPage extends Page {
 	protected function getHtml() {
 
 		$context = $this->getContext();
-		$context->getOutput()->addModuleStyles( 'ext.smw.page.styles' );
+		$context->getOutput()->addModuleStyles( [ 'ext.smw.page.styles' ] );
 
 		$request = $context->getRequest();
 		$store = ApplicationFactory::getInstance()->getStore();
@@ -87,9 +87,11 @@ class ConceptPage extends Page {
 		}
 
 		// Make navigation point to the result list.
-		$this->getTitle()->setFragment( '#smw-result' );
+		$title = $this->getTitle();
+		$title->setFragment( '#smw-result' );
 		$isRTL = $context->getLanguage()->isRTL();
 
+		$titleText = htmlspecialchars( $title->getText() );
 		$resultCount = count( $diWikiPages );
 
 		$limit = $request->getVal( 'limit', $this->getOption( 'pagingLimit' ) );
@@ -111,8 +113,7 @@ class ConceptPage extends Page {
 				[
 					'class' => 'clearfix'
 				],
-				Pager::pagination( $this->getTitle(), $limit, $offset, $resultCount,
-					$query + [ '_target'	=> '#smw-result' ] )
+				Pager::pagination( $title, $limit, $offset, $resultCount, $query + [ '_target' => '#smw-result' ] )
 			) . Html::rawElement(
 				'div',
 				[
@@ -130,7 +131,7 @@ class ConceptPage extends Page {
 			$isRTL
 		);
 
-		if ( $this->getTitle()->exists() ) {
+		if ( $title->exists() ) {
 
 			$listBuilder = new ListBuilder(
 				$store

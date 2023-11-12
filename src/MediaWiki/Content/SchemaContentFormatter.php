@@ -85,6 +85,8 @@ class SchemaContentFormatter {
 	public function getModuleStyles() {
 		return array_merge( [
 			'mediawiki.helplink',
+			// WGL - Needed by smw.content.schemaview now that it isn't bundled in ext.smw.style.
+			'smw.jsonview.styles',
 			'smw.content.schema',
 			'mediawiki.content.json',
 			'ext.smw.style',

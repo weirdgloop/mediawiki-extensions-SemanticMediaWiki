@@ -35,7 +35,11 @@ class Deferred {
 	 * @param ParserOutput $parserOutput
 	 */
 	public static function registerResources( ParserOutput $parserOutput ) {
-		$parserOutput->addModuleStyles( [ 'ext.smw.deferred.styles' ] );
+		$parserOutput->addModuleStyles( [
+			'ext.smw.style',
+			'ext.smw.tooltip.styles',
+			'ext.smw.deferred.styles',
+		] );
 		$parserOutput->addModules( [ 'ext.smw.deferred' ] );
 	}
 

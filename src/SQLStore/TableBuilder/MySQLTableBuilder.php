@@ -26,15 +26,15 @@ class MySQLTableBuilder extends TableBuilder {
 
 		$fieldTypes = [
 			 // like page_id in MW page table
-			'id'         => 'INT(11) UNSIGNED',
+			'id'         => 'INT UNSIGNED',
 			 // like page_id in MW page table
-			'id_primary' => 'INT(11) UNSIGNED NOT NULL KEY AUTO_INCREMENT',
+			'id_primary' => 'INT UNSIGNED NOT NULL KEY AUTO_INCREMENT',
 
 			 // (see postgres on the difference)
-			'id_unsigned' => 'INT(11) UNSIGNED',
+			'id_unsigned' => 'INT UNSIGNED',
 
 			 // like page_namespace in MW page table
-			'namespace'  => 'INT(11)',
+			'namespace'  => 'INT',
 			 // like page_title in MW page table
 			'title'      => 'VARBINARY(255)',
 			 // like iw_prefix in MW interwiki table
@@ -46,12 +46,12 @@ class MySQLTableBuilder extends TableBuilder {
 			'text'       => 'TEXT',
 			'boolean'    => 'TINYINT(1)',
 			'double'     => 'DOUBLE',
-			'integer'    => 'INT(8)',
+			'integer'    => 'INT',
 			'char_long'  => "VARBINARY($charLongLength)",
 			'char_nocase'      => 'VARCHAR(255) CHARSET utf8 COLLATE utf8_general_ci',
 			'char_long_nocase' => "VARCHAR($charLongLength) CHARSET utf8 COLLATE utf8_general_ci",
-			'usage_count'      => 'INT(8) UNSIGNED',
-			'integer_unsigned' => 'INT(8) UNSIGNED',
+			'usage_count'      => 'INT UNSIGNED',
+			'integer_unsigned' => 'INT UNSIGNED',
 			'enum' => 'ENUM',
 			'timestamp' => 'BINARY(14)'
 		];
