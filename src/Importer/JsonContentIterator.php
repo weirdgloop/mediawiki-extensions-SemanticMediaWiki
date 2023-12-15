@@ -73,7 +73,7 @@ class JsonContentIterator implements ContentIterator {
 	 *
 	 * @since 2.5
 	 *
-	 * @return ArrayIterator
+	 * @return Iterator
 	 */
 	public function getIterator(): Iterator {
 		return new ArrayIterator( $this->jsonImportContentsFileDirReader->getContentList() );
