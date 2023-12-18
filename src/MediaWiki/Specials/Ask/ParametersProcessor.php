@@ -175,7 +175,7 @@ class ParametersProcessor {
 
 		if ( !empty( $query_val ) ) {
 			// p is used for any additional parameters in certain links.
-			$parameterList = Infolink::decodeParameters( $query_val, false );
+			$parameterList = Infolink::decodeParameters( $query_val ?? '', false );
 		} else {
 			$query_values = $request->getArray( 'p' );
 
@@ -188,7 +188,7 @@ class ParametersProcessor {
 			}
 
 			// p is used for any additional parameters in certain links.
-			$parameterList = Infolink::decodeParameters( $query_values, false );
+			$parameterList = Infolink::decodeParameters( $query_values ?? '', false );
 		}
 
 		foreach ( $parameterList as $key => $value ) {
