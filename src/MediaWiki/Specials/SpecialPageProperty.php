@@ -38,6 +38,7 @@ class SpecialPageProperty extends SpecialPage {
 	 */
 	public function execute( $query ) {
 
+		$query ??= '';
 		$request = $this->getRequest();
 
 		if ( $request->getText( 'cl', '' ) !== '' ) {
