@@ -29,9 +29,11 @@ class GroupPermissions {
 	public function initPermissions( &$vars ) {
 
 		$groups = [
+			/* WGL - Disable SMW user groups.
 			'smwadministrator' => $this->forAdminRole(),
 			'smwcurator' => $this->forCuratorRole(),
 			'smweditor' => $this->forEditorRole(),
+			*/
 			'user' => $this->forDefaultUserRole()
 		];
 
