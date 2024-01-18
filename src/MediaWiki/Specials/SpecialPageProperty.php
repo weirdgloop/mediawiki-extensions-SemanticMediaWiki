@@ -48,7 +48,7 @@ class SpecialPageProperty extends SpecialPage {
 		}
 
 		if ( $query !== '' ) {
-			$query = Encoder::unescape( $query );
+			$query = Encoder::unescape( (string)$query );
 		}
 
 		// Get parameters
@@ -171,7 +171,7 @@ class SpecialPageProperty extends SpecialPage {
 
 		$output->addModuleStyles( [ 'ext.smw.special.style' ] );
 		$output->addModules( [
-			'ext.smw.autocomplete.article',
+			'ext.smw.autocomplete.page',
 			'ext.smw.autocomplete.property',
 			'ext.smw.tooltip'
 		] );
