@@ -80,7 +80,8 @@ class ArticleViewHeader implements HookListener {
 		// Preload data most likely to be used during a request hereby providing
 		// a possibility to bundle relevant data objects early given that this
 		// hook runs before any other GET request
-		$this->store->getObjectIds()->preload( [ $subject ] );
+		// WGL - This is a premature optimisation that in practice causes excessive DB calls, even if the parser cache is used.
+		//$this->store->getObjectIds()->preload( [ $subject ] );
 
 		$changePropagationWatchlist = array_flip(
 			$this->getOption( 'smwgChangePropagationWatchlist', [] )
