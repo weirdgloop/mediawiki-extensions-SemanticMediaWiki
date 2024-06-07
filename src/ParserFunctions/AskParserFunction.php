@@ -209,10 +209,12 @@ class AskParserFunction {
 		$this->parserData->copyToParserOutput();
 
 		// 'userlang' will trigger a cache fragmentation by user language
-		$this->parserData->addExtraParserKey( 'userlang' );
+		// WGL - Always use content language.
+		//$this->parserData->addExtraParserKey( 'userlang' );
 
 		// 'dateformat'  will trigger a cache fragmentation by date preference
-		$this->parserData->addExtraParserKey( 'dateformat' );
+		// WGL - Use default date format.
+		//$this->parserData->addExtraParserKey( 'dateformat' );
 
 		return $result;
 	}

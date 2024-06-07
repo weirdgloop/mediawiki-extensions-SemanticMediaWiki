@@ -194,12 +194,14 @@ class TimeValueFormatter extends DataValueFormatter {
 		// Special:Preferences
 
 		if ( $precision <= DITime::PREC_YMD ) {
-			return $language->date( "$year$month$day" . '000000', false, true, false );
+			// WGL - Use default date format.
+			return $language->date( "$year$month$day" . '000000', false, false, false );
 		}
 
 		$time = str_replace( ':', '', $this->getTimeString() );
 
-		return $language->timeanddate( "$year$month$day$time", false, true, false );
+		// WGL - Use default date format.
+		return $language->timeanddate( "$year$month$day$time", false, false, false );
 	}
 
 	/**

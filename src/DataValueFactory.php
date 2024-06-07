@@ -209,7 +209,9 @@ class DataValueFactory {
 
 		$dataValue->setOption(
 			DataValue::OPT_USER_LANGUAGE,
-			$localizer->getUserLanguage()->getCode()
+			// WGL - Always use content language.
+			$localizer->getContentLanguage()->getCode()
+			//$localizer->getUserLanguage()->getCode()
 		);
 
 		$dataValue->setOption(

@@ -119,7 +119,8 @@ class IntlNumberFormatter {
 	 * @return string
 	 */
 	public function getSeparatorByLanguage( $type, $locale = '' ) {
-		$language = $locale === self::USER_LANGUAGE ? $this->getUserLanguage() : $this->getContentLanguage();
+		// WGL - Always use content language.
+		$language = /*$locale === self::USER_LANGUAGE ? $this->getUserLanguage() :*/ $this->getContentLanguage();
 
 		if ( $type === self::DECIMAL_SEPARATOR ) {
 			return $this->getPreferredLocalizedSeparator( self::DECIMAL_SEPARATOR, 'smw_decseparator', $language );
