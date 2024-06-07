@@ -195,11 +195,12 @@ class InTextAnnotationParser {
 		// Ensure remaining encoded entities are decoded again
 		$text = LinksEncoder::removeLinkObfuscation( $text );
 
-		if ( $this->isEnabledNamespace ) {
-			// WGL - Unneeded.
-			//$this->parserData->getOutput()->addModules( $this->getModules() );
-			$this->parserData->addExtraParserKey( 'userlang' );
-		}
+		// WGL - userlang seems to have no impact on the output and all this does is fragment all SMW namespace parser caches by user language.
+		// if ( $this->isEnabledNamespace ) {
+		// 	// WGL - Unneeded.
+		// 	//$this->parserData->getOutput()->addModules( $this->getModules() );
+		// 	$this->parserData->addExtraParserKey( 'userlang' );
+		// }
 
 		$this->parserData->copyToParserOutput();
 
