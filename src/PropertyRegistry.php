@@ -419,7 +419,9 @@ class PropertyRegistry {
 	public function findPreferredPropertyLabelFromIdByLanguageCode( $id, $languageCode = '' ) {
 
 		if ( $languageCode === false || $languageCode === '' ) {
-			$languageCode = Localizer::getInstance()->getUserLanguage()->getCode();
+			// WGL - Always use content language.
+			$languageCode = Localizer::getInstance()->getContentLanguage()->getCode();
+			//$languageCode = Localizer::getInstance()->getUserLanguage()->getCode();
 		}
 
 		return $this->propertyLabelFinder->findPreferredPropertyLabelByLanguageCode( $id, $languageCode );
