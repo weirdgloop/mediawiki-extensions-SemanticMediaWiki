@@ -90,7 +90,7 @@ final class Setup {
 	/**
 	 * @since 3.0
 	 */
-	public static function isValid( $isCli = false ) {
+	public static function isValid( $_unused = false ) {
 		return true;
 	}
 

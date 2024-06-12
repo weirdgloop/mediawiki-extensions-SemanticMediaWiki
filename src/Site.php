@@ -104,7 +104,7 @@ class Site {
 			return true;
 		}
 
-		return $GLOBALS['wgCommandLineMode'];
+		return MW_ENTRY_POINT === 'cli' || defined( 'MEDIAWIKI_JOB_RUNNER' );
 	}
 
 	/**

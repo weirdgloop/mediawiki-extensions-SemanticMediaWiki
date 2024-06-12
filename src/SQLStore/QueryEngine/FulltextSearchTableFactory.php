@@ -154,7 +154,7 @@ class FulltextSearchTableFactory {
 
 		// https://www.mediawiki.org/wiki/Manual:$wgCommandLineMode
 		$textChangeUpdater->isCommandLineMode(
-			$GLOBALS['wgCommandLineMode']
+			MW_ENTRY_POINT === 'cli' || defined( 'MEDIAWIKI_JOB_RUNNER' )
 		);
 
 		return $textChangeUpdater;
