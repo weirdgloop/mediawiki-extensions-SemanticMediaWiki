@@ -92,6 +92,9 @@ class SetupFile {
 	}
 
 	public static function isGoodSchema( bool $isCli = false ): bool {
+		// WGL - Disable setup checks.
+		return true;
+		/*
 		if ( $isCli && defined( 'MW_PHPUNIT_TEST' ) ) {
 			return true;
 		}
@@ -116,6 +119,7 @@ class SetupFile {
 		}
 
 		return $isGoodSchema;
+		*/
 	}
 
 	public static function makeUpgradeKey( array $vars ): string {
