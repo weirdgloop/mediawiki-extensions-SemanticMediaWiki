@@ -16,7 +16,7 @@ use SMW\Tests\PHPUnitCompat;
  *
  * @author mwjames
  */
-class ContentParserTest extends \PHPUnit_Framework_TestCase {
+class ContentParserTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -81,7 +81,7 @@ class ContentParserTest extends \PHPUnit_Framework_TestCase {
 		$this->parser->expects( $this->any() )
 			->method( 'parse' )
 			->with( $this->stringContains( $text ) )
-			->will( $this->returnValue( $this->parserOutput ) );
+			->willReturn( $this->parserOutput );
 
 		$instance = new ContentParser(
 			$this->title,
@@ -112,7 +112,7 @@ class ContentParserTest extends \PHPUnit_Framework_TestCase {
 
 			$contentRenderer->expects( $this->any() )
 				->method( 'getParserOutput' )
-				->will( $this->returnValue( $this->parserOutput ) );
+				->willReturn( $this->parserOutput );
 
 			return $contentRenderer;
 		} );
@@ -123,11 +123,11 @@ class ContentParserTest extends \PHPUnit_Framework_TestCase {
 
 		$revision->expects( $this->any() )
 			->method( 'getContent' )
-			->will( $this->returnValue( $content ) );
+			->willReturn( $content );
 
 		$this->revisionGuard->expects( $this->any() )
 			->method( 'getRevision' )
-			->will( $this->returnValue( $revision ) );
+			->willReturn( $revision );
 
 		$instance = new ContentParser(
 			$this->title,

@@ -13,7 +13,7 @@ use SMW\PropertyAliasFinder;
  *
  * @author mwjames
  */
-class PropertyAliasFinderTest extends \PHPUnit_Framework_TestCase {
+class PropertyAliasFinderTest extends \PHPUnit\Framework\TestCase {
 
 	private $cache;
 	private $store;
@@ -104,7 +104,7 @@ class PropertyAliasFinderTest extends \PHPUnit_Framework_TestCase {
 	public function testGetKnownPropertyAliasesByLanguageCodeCached() {
 		$this->cache->expects( $this->once() )
 			->method( 'fetch' )
-			->will( $this->returnValue( [ '⧼smw-bar⧽' => '_Foo' ] ) );
+			->willReturn( [ '⧼smw-bar⧽' => '_Foo' ] );
 
 		$instance = new PropertyAliasFinder(
 			$this->cache
@@ -127,7 +127,7 @@ class PropertyAliasFinderTest extends \PHPUnit_Framework_TestCase {
 	public function testGetKnownPropertyAliasesByLanguageCode() {
 		$this->cache->expects( $this->once() )
 			->method( 'fetch' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$instance = new PropertyAliasFinder(
 			$this->cache

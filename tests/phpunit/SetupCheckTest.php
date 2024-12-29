@@ -15,7 +15,7 @@ use ReflectionClass;
  *
  * @author mwjames
  */
-class SetupCheckTest extends \PHPUnit_Framework_TestCase {
+class SetupCheckTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -23,12 +23,6 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		// Don't know why this is undefined but it is required by
-		// testReadFromFile_InvalidJSON_ThrowsException()
-		if ( !defined( 'SMW_PHPUNIT_DIR' ) ) {
-			define( 'SMW_PHPUNIT_DIR', __DIR__ );
-		}
 
 		$this->setupFile = $this->getMockBuilder( '\SMW\SetupFile' )
 			->disableOriginalConstructor()
@@ -50,12 +44,12 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 	public function testHasError() {
 		$this->setupFile->expects( $this->any() )
 			->method( 'inMaintenanceMode' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$instance = new SetupCheck( [], $this->setupFile );
 
-		$this->assertInternalType(
-			'boolean',
+		$this->assertIsBool(
+
 			$instance->hasError()
 		);
 	}
@@ -63,8 +57,8 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 	public function testIsCli() {
 		$instance = new SetupCheck( [], $this->setupFile );
 
-		$this->assertInternalType(
-			'boolean',
+		$this->assertIsBool(
+
 			$instance->isCli()
 		);
 	}
@@ -114,7 +108,7 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 	public function testGetError_CliOutput( $errorType ) {
 		$this->setupFile->expects( $this->any() )
 			->method( 'getMaintenanceMode' )
-			->will( $this->returnValue( [ 'Foo' => 'bar' ] ) );
+			->willReturn( [ 'Foo' => 'bar' ] );
 
 		$instance = new SetupCheck(
 			[
@@ -130,8 +124,8 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 			$errorType
 		);
 
-		$this->assertInternalType(
-			'string',
+		$this->assertIsString(
+
 			$instance->getError( true )
 		);
 	}
@@ -142,7 +136,7 @@ class SetupCheckTest extends \PHPUnit_Framework_TestCase {
 	public function testGetError_NoCliHTMLOutput( $errorType ) {
 		$this->setupFile->expects( $this->any() )
 			->method( 'getMaintenanceMode' )
-			->will( $this->returnValue( [ 'Foo' => 'bar' ] ) );
+			->willReturn( [ 'Foo' => 'bar' ] );
 
 		$instance = new SetupCheck(
 			[

@@ -2,6 +2,8 @@
 
 namespace SMW\Tests\MediaWiki;
 
+use MediaWiki\Block\Block;
+use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Edit\PreparedEdit;
 use MediaWiki\User\UserIdentity;
 use ParserOptions;
@@ -23,7 +25,7 @@ use SMW\Tests\PHPUnitCompat;
  *
  * @author mwjames
  */
-class HooksTest extends \PHPUnit_Framework_TestCase {
+class HooksTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -59,11 +61,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$this->title->expects( $this->any() )
 			->method( 'getLatestRevID' )
-			->will( $this->returnValue( 9900 ) );
+			->willReturn( 9900 );
 
 		$this->outputPage = $this->getMockBuilder( '\OutputPage' )
 			->disableOriginalConstructor()
@@ -71,7 +73,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->outputPage->expects( $this->any() )
 			->method( 'getUser' )
-			->will( $this->returnValue( $user ) );
+			->willReturn( $user );
 
 		$webRequest = $this->getMockBuilder( '\WebRequest' )
 			->disableOriginalConstructor()
@@ -83,11 +85,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->requestContext->expects( $this->any() )
 			->method( 'getOutput' )
-			->will( $this->returnValue( $this->outputPage ) );
+			->willReturn( $this->outputPage );
 
 		$this->requestContext->expects( $this->any() )
 			->method( 'getRequest' )
-			->will( $this->returnValue( $webRequest ) );
+			->willReturn( $webRequest );
 
 		$this->skin = $this->getMockBuilder( '\Skin' )
 			->disableOriginalConstructor()
@@ -95,11 +97,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->skin->expects( $this->any() )
 			->method( 'getContext' )
-			->will( $this->returnValue( $this->requestContext ) );
+			->willReturn( $this->requestContext );
 
 		$this->skin->expects( $this->any() )
 			->method( 'getOutput' )
-			->will( $this->returnValue( $this->outputPage ) );
+			->willReturn( $this->outputPage );
 
 		$this->store = $this->getMockBuilder( '\SMW\Store' )
 			->disableOriginalConstructor()
@@ -111,7 +113,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$contentParser->expects( $this->any() )
 			->method( 'parse' )
-			->will( $this->returnValue( $this->parser ) );
+			->willReturn( $this->parser );
 
 		$deferredCallableUpdate = $this->getMockBuilder( CallableUpdate::class )
 			->disableOriginalConstructor()
@@ -185,9 +187,9 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 		self::$handlers[] = call_user_func_array( [ $this, $method ], [ $instance ] );
 	}
 
-    /**
-     * @depends testRegister
-     */
+	/**
+	 * @depends testRegister
+	 */
 	public function testCheckOnMissingHandlers() {
 		$disabled = [
 			'PageSchemasRegisterHandlers',
@@ -279,17 +281,17 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 		];
 	}
 
-//SMW::Maintenance::AfterUpdateEntityCollationComplete
+// SMW::Maintenance::AfterUpdateEntityCollationComplete
 	public function callParserAfterTidy( $instance ) {
 		$handler = 'ParserAfterTidy';
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->parser->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$text = '';
 
@@ -310,11 +312,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->skin->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$data = '';
 
@@ -335,11 +337,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->skin->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$sidebar = [];
 
@@ -364,11 +366,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->outputPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -387,11 +389,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->outputPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -446,7 +448,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->store->expects( $this->any() )
 			->method( 'getPropertySubjects' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$user = $this->getMockBuilder( '\User' )
 			->disableOriginalConstructor()
@@ -458,7 +460,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$searchEngine->expects( $this->any() )
 			->method( 'getErrors' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$specialSearch = $this->getMockBuilder( '\SpecialSearch' )
 			->disableOriginalConstructor()
@@ -466,19 +468,19 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$specialSearch->expects( $this->any() )
 			->method( 'getSearchEngine' )
-			->will( $this->returnValue( $searchEngine ) );
+			->willReturn( $searchEngine );
 
 		$specialSearch->expects( $this->any() )
 			->method( 'getUser' )
-			->will( $this->returnValue( $user ) );
+			->willReturn( $user );
 
 		$specialSearch->expects( $this->any() )
 			->method( 'getNamespaces' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$specialSearch->expects( $this->any() )
 			->method( 'getContext' )
-			->will( $this->returnValue( $this->requestContext ) );
+			->willReturn( $this->requestContext );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -502,7 +504,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$parser = $this->getMockBuilder( '\Parser' )
 			->disableOriginalConstructor()
@@ -510,7 +512,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$parser->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$parser->expects( $this->any() )
 			->method( 'getOptions' )
@@ -550,7 +552,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$content->expects( $this->any() )
 			->method( 'getContentHandler' )
-			->will( $this->returnValue( $contentHandler ) );
+			->willReturn( $contentHandler );
 
 		$title = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
@@ -562,7 +564,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$wikiPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		$revision = $this->getMockBuilder( '\MediaWiki\Revision\RevisionRecord' )
 			->disableOriginalConstructor()
@@ -570,7 +572,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$revision->expects( $this->any() )
 			->method( 'getContent' )
-			->will( $this->returnValue( $content ) );
+			->willReturn( $content );
 
 		$user = $this->getMockBuilder( '\User' )
 			->disableOriginalConstructor()
@@ -611,11 +613,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$oldTitle->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_SPECIAL ) );
+			->willReturn( NS_SPECIAL );
 
 		$oldTitle->expects( $this->any() )
 			->method( 'isSpecialPage' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$newTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
@@ -623,7 +625,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$newTitle->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_SPECIAL ) );
+			->willReturn( NS_SPECIAL );
 
 		$user = $this->getMockBuilder( '\User' )
 			->disableOriginalConstructor()
@@ -661,7 +663,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$content->expects( $this->any() )
 			->method( 'getContentHandler' )
-			->will( $this->returnValue( $contentHandler ) );
+			->willReturn( $contentHandler );
 
 		$revision = $this->getMockBuilder( '\MediaWiki\Revision\RevisionRecord' )
 			->disableOriginalConstructor()
@@ -669,7 +671,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$revision->expects( $this->any() )
 			->method( 'getContent' )
-			->will( $this->returnValue( $content ) );
+			->willReturn( $content );
 
 		$wikiPage = $this->getMockBuilder( '\WikiPage' )
 			->disableOriginalConstructor()
@@ -677,7 +679,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$wikiPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$user = $this->getMockBuilder( '\User' )
 			->disableOriginalConstructor()
@@ -689,7 +691,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$revisionGuard->expects( $this->any() )
 			->method( 'newRevisionFromPage' )
-			->will( $this->returnValue( $revision ) );
+			->willReturn( $revision );
 
 		$wikiPage->expects( $this->any() )
 			->method( 'prepareContentForEdit' )
@@ -718,11 +720,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'getDBKey' )
-			->will( $this->returnValue( 'Foo' ) );
+			->willReturn( 'Foo' );
 
 		$this->title->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$entityIdManager = $this->getMockBuilder( '\SMW\SQLStore\EntityStore\EntityIdManager' )
 			->disableOriginalConstructor()
@@ -739,15 +741,15 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyTables' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyTableInfoFetcher' )
-			->will( $this->returnValue( $propertyTableInfoFetcher ) );
+			->willReturn( $propertyTableInfoFetcher );
 
 		$store->expects( $this->any() )
 			->method( 'getObjectIds' )
-			->will( $this->returnValue( $entityIdManager ) );
+			->willReturn( $entityIdManager );
 
 		$this->testEnvironment->registerObject( 'Store', $store );
 
@@ -757,7 +759,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$page->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$page->expects( $this->any() )
 			->method( 'makeParserOptions' )
@@ -770,11 +772,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$article->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$article->expects( $this->any() )
 			->method( 'getPage' )
-			->will( $this->returnValue( $page ) );
+			->willReturn( $page );
 
 		$outputDone = '';
 		$useParserCache = '';
@@ -800,7 +802,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$wikiPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -823,27 +825,27 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$semanticData->expects( $this->any() )
 			->method( 'getSubject' )
-			->will( $this->returnValue( DIWikiPage::newFromText( __METHOD__ ) ) );
+			->willReturn( DIWikiPage::newFromText( __METHOD__ ) );
 
 		$semanticData->expects( $this->any() )
 			->method( 'getProperties' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$semanticData->expects( $this->any() )
 			->method( 'getSubSemanticData' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->store->expects( $this->any() )
 			->method( 'getSemanticData' )
-			->will( $this->returnValue( $semanticData ) );
+			->willReturn( $semanticData );
 
 		$this->title->expects( $this->any() )
 			->method( 'getDBKey' )
-			->will( $this->returnValue( 'Foo' ) );
+			->willReturn( 'Foo' );
 
 		$this->title->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$wikiPage = $this->getMockBuilder( '\WikiPage' )
 			->disableOriginalConstructor()
@@ -851,7 +853,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$wikiPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$user = $this->getMockBuilder( '\User' )
 			->disableOriginalConstructor()
@@ -886,7 +888,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getObjectIds' )
-			->will( $this->returnValue( $idTable ) );
+			->willReturn( $idTable );
 
 		$this->testEnvironment->registerObject( 'Store', $store );
 
@@ -896,19 +898,17 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_SPECIAL ) );
+			->willReturn( NS_SPECIAL );
 
-		$linksUpdate = $this->getMockBuilder( '\LinksUpdate' )
-			->disableOriginalConstructor()
-			->getMock();
+		$linksUpdate = $this->createMock( LinksUpdate::class );
 
 		$linksUpdate->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$linksUpdate->expects( $this->any() )
 			->method( 'getParserOutput' )
-			->will( $this->returnValue( $parserOutput ) );
+			->willReturn( $parserOutput );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1006,7 +1006,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$schemaFinder->expects( $this->any() )
 			->method( 'getSchemaListByType' )
-			->will( $this->returnValue( $schemaList ) );
+			->willReturn( $schemaList );
 
 		$schemaFactory = $this->getMockBuilder( '\SMW\Schema\SchemaFactory' )
 			->disableOriginalConstructor()
@@ -1014,7 +1014,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$schemaFactory->expects( $this->any() )
 			->method( 'newSchemaFinder' )
-			->will( $this->returnValue( $schemaFinder ) );
+			->willReturn( $schemaFinder );
 
 		$this->testEnvironment->registerObject( 'SchemaFactory', $schemaFactory );
 
@@ -1047,7 +1047,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$skinTemplate->expects( $this->any() )
 			->method( 'getUser' )
-			->will( $this->returnValue( $user ) );
+			->willReturn( $user );
 
 		$links = [];
 
@@ -1125,7 +1125,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$article->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1148,7 +1148,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$article->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1212,7 +1212,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$editPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $title ) );
+			->willReturn( $title );
 
 		$outputPage = $this->getMockBuilder( '\OutputPage' )
 			->disableOriginalConstructor()
@@ -1220,7 +1220,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$outputPage->expects( $this->any() )
 			->method( 'getUser' )
-			->will( $this->returnValue( $user ) );
+			->willReturn( $user );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1261,7 +1261,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$parser->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1322,11 +1322,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$this->title->expects( $this->any() )
 			->method( 'getDBKey' )
-			->will( $this->returnValue( 'Foo' ) );
+			->willReturn( 'Foo' );
 
 		$this->title->expects( $this->any() )
 			->method( 'getNamespace' )
-			->will( $this->returnValue( NS_MAIN ) );
+			->willReturn( NS_MAIN );
 
 		$parseOptions = $this->getMockBuilder( '\ParserOptions' )
 			->disableOriginalConstructor()
@@ -1343,11 +1343,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyTables' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyTableInfoFetcher' )
-			->will( $this->returnValue( $propertyTableInfoFetcher ) );
+			->willReturn( $propertyTableInfoFetcher );
 
 		$this->testEnvironment->registerObject( 'Store', $store );
 
@@ -1357,7 +1357,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$wikiPage->expects( $this->any() )
 			->method( 'getTitle' )
-			->will( $this->returnValue( $this->title ) );
+			->willReturn( $this->title );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1389,24 +1389,17 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 	public function callBlockIpComplete( $instance ) {
 		$handler = 'BlockIpComplete';
 
-		$block = $this->getMockBuilder( '\Block' )
-			->disableOriginalConstructor()
-			->getMock();
+		$block = $this->createMock( Block::class );
 
-		if ( method_exists( $block, 'getTarget' ) ) {
-			$block->expects( $this->any() )
-				->method( 'getTarget' )
-				->will( $this->returnValue( 'Foo' ) );
-		} else {
-			$user = $this->createMock( UserIdentity::class );
-			$user->expects( $this->any() )
-				->method( 'getName' )
-				->willReturn( 'Foo' );
+		$user = $this->createMock( UserIdentity::class );
+		$user->expects( $this->any() )
+			->method( 'getName' )
+			->willReturn( 'Foo' );
 
-			$block->expects( $this->any() )
-				->method( 'getTargetUserIdentity' )
-				->willReturn( $user );
-		}
+		$block->expects( $this->any() )
+			->method( 'getTargetUserIdentity' )
+			->willReturn( $user );
+
 		$performer = '';
 		$priorBlock = '';
 
@@ -1425,24 +1418,16 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 	public function callUnblockUserComplete( $instance ) {
 		$handler = 'UnblockUserComplete';
 
-		$block = $this->getMockBuilder( '\Block' )
-			->disableOriginalConstructor()
-			->getMock();
+		$block = $this->createMock( Block::class );
 
-		if ( method_exists( $block, 'getTarget' ) ) {
-			$block->expects( $this->any() )
-				->method( 'getTarget' )
-				->will( $this->returnValue( 'Foo' ) );
-		} else {
-			$user = $this->createMock( UserIdentity::class );
-			$user->expects( $this->any() )
-				->method( 'getName' )
-				->willReturn( 'Foo' );
+		$user = $this->createMock( UserIdentity::class );
+		$user->expects( $this->any() )
+			->method( 'getName' )
+			->willReturn( 'Foo' );
 
-			$block->expects( $this->any() )
-				->method( 'getTargetUserIdentity' )
-				->willReturn( $user );
-		}
+		$block->expects( $this->any() )
+			->method( 'getTargetUserIdentity' )
+			->willReturn( $user );
 
 		$performer = '';
 		$priorBlock = '';
@@ -1468,7 +1453,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$user->expects( $this->any() )
 			->method( 'getName' )
-			->will( $this->returnValue( 'Foo' ) );
+			->willReturn( 'Foo' );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1491,7 +1476,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$user->expects( $this->any() )
 			->method( 'getName' )
-			->will( $this->returnValue( 'foo_user' ) );
+			->willReturn( 'foo_user' );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1604,15 +1589,15 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyTableInfoFetcher' )
-			->will( $this->returnValue( $propertyTableInfoFetcher ) );
+			->willReturn( $propertyTableInfoFetcher );
 
 		$store->expects( $this->any() )
 			->method( 'getConnection' )
-			->will( $this->returnValue( $connection ) );
+			->willReturn( $connection );
 
 		$store->expects( $this->any() )
 			->method( 'getOptions' )
-			->will( $this->returnValue( new \SMW\Options() ) );
+			->willReturn( new \SMW\Options() );
 
 		$semanticData = $this->getMockBuilder( '\SMW\SemanticData' )
 			->disableOriginalConstructor()
@@ -1620,7 +1605,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$semanticData->expects( $this->any() )
 			->method( 'getSubject' )
-			->will( $this->returnValue( DIWikiPage::newFromText( __METHOD__ ) ) );
+			->willReturn( DIWikiPage::newFromText( __METHOD__ ) );
 
 		$changeOp = $this->getMockBuilder( '\SMW\SQLStore\ChangeOp\ChangeOp' )
 			->disableOriginalConstructor()
@@ -1628,19 +1613,19 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp->expects( $this->any() )
 			->method( 'getChangedEntityIdSummaryList' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$changeOp->expects( $this->any() )
 			->method( 'getOrderedDiffByTable' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$changeOp->expects( $this->any() )
 			->method( 'getTableChangeOps' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$changeOp->expects( $this->any() )
 			->method( 'getFixedPropertyRecords' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1693,7 +1678,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getObjectIds' )
-			->will( $this->returnValue( $idTableLookup ) );
+			->willReturn( $idTableLookup );
 
 		$result = '';
 
@@ -1723,11 +1708,11 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$store->expects( $this->any() )
 			->method( 'getObjectIds' )
-			->will( $this->returnValue( $idTable ) );
+			->willReturn( $idTable );
 
 		$store->expects( $this->any() )
 			->method( 'getPropertyValues' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$semanticData = $this->getMockBuilder( '\SMW\SemanticData' )
 			->disableOriginalConstructor()
@@ -1735,7 +1720,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$semanticData->expects( $this->any() )
 			->method( 'getSubject' )
-			->will( $this->returnValue( DIWikiPage::newFromText( __METHOD__ ) ) );
+			->willReturn( DIWikiPage::newFromText( __METHOD__ ) );
 
 		$requestOptions = $this->getMockBuilder( '\SMW\RequestOptions' )
 			->disableOriginalConstructor()
@@ -1743,7 +1728,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 
 		$requestOptions->expects( $this->any() )
 			->method( 'getExtraConditions' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->assertTrue(
 			$instance->isRegistered( $handler )
@@ -1854,8 +1839,8 @@ class HooksTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function assertThatHookIsExcutable( callable $handler, $arguments ) {
-		$this->assertInternalType(
-			'boolean',
+		$this->assertIsBool(
+
 			call_user_func_array( $handler, $arguments )
 		);
 	}

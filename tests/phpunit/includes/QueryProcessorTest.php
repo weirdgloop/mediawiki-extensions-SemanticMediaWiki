@@ -20,19 +20,20 @@ use SMW\Tests\PHPUnitCompat;
  * @group SMWExtension
  * @group SMWQueries
  * @group SMWQueryProcessorTest
+ * @group Database
  *
  * @author Nischay Nahata
  */
 class SMWQueryProcessorTest extends SMWIntegrationTestCase {
 
 	use PHPUnitCompat;
-	
+
 	public function createQueryDataProvider() {
 		return [
 			[ '[[Modification date::+]]|?Modification date|sort=Modification date|order=desc' ],
 		];
 	}
-	
+
 	/**
 	* @dataProvider resultAliasDataProvider
 	*/
@@ -50,7 +51,7 @@ class SMWQueryProcessorTest extends SMWIntegrationTestCase {
 			}
 		}
 	}
-	
+
 	public function testGetResultPrinter_ThrowsException() {
 		$this->expectException( '\SMW\Query\Exception\ResultFormatNotFoundException' );
 		SMWQueryProcessor::getResultPrinter( 'unknown_format' );

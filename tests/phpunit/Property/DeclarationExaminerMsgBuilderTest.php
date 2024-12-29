@@ -16,7 +16,7 @@ use SMW\Tests\TestEnvironment;
  *
  * @author mwjames
  */
-class DeclarationExaminerMsgBuilderTest extends \PHPUnit_Framework_TestCase {
+class DeclarationExaminerMsgBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private $declarationExaminer;
 
@@ -41,7 +41,7 @@ class DeclarationExaminerMsgBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testBuildHTML( $messages, $expected ) {
 		$this->declarationExaminer->expects( $this->any() )
 			->method( 'getMessages' )
-			->will( $this->returnValue( $messages ) );
+			->willReturn( $messages );
 
 		$instance = new DeclarationExaminerMsgBuilder();
 

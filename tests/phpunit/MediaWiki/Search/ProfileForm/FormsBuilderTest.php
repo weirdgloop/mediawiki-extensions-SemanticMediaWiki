@@ -15,7 +15,7 @@ use SMW\Tests\PHPUnitCompat;
  *
  * @author mwjames
  */
-class FormsBuilderTest extends \PHPUnit_Framework_TestCase {
+class FormsBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -57,15 +57,15 @@ class FormsBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$customForm->expects( $this->any() )
 			->method( 'getParameters' )
-			->will( $this->returnValue( [] ) );
+			->willReturn( [] );
 
 		$this->formsFactory->expects( $this->any() )
 			->method( 'newOpenForm' )
-			->will( $this->returnValue( $openForm ) );
+			->willReturn( $openForm );
 
 		$this->formsFactory->expects( $this->any() )
 			->method( 'newCustomForm' )
-			->will( $this->returnValue( $customForm ) );
+			->willReturn( $customForm );
 
 		$instance = new FormsBuilder(
 			$this->webRequest,
@@ -110,6 +110,5 @@ class FormsBuilderTest extends \PHPUnit_Framework_TestCase {
 			$actual
 		);
 	}
-
 
 }

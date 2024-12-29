@@ -2,6 +2,7 @@
 
 namespace SMW\Tests\MediaWiki\Jobs;
 
+use RuntimeException;
 use SMW\DIWikiPage;
 use SMW\StoreFactory;
 use SMW\MediaWiki\Jobs\FulltextSearchTableRebuildJob;
@@ -17,7 +18,7 @@ use SMW\Tests\Utils\Connection\TestDatabaseTableBuilder;
  *
  * @author mwjames
  */
-class FulltextSearchTableRebuildJobTest extends \PHPUnit_Framework_TestCase {
+class FulltextSearchTableRebuildJobTest extends \PHPUnit\Framework\TestCase {
 
 	private $testEnvironment;
 

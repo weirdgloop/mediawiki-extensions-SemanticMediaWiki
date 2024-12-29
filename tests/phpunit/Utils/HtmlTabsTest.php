@@ -14,15 +14,15 @@ use SMW\Tests\PHPUnitCompat;
  *
  * @author mwjames
  */
-class HtmlTabsTest extends \PHPUnit_Framework_TestCase {
+class HtmlTabsTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
 	public function testHasContents() {
 		$instance = new HtmlTabs();
 
-		$this->assertInternalType(
-			'bool',
+		$this->assertIsBool(
+
 			$instance->hasContents()
 		);
 	}

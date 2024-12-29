@@ -16,7 +16,7 @@ use SMWQuery;
  *
  * @author Stephan Gambke
  */
-class SearchEngineFactoryTest extends \PHPUnit_Framework_TestCase {
+class SearchEngineFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -75,7 +75,7 @@ class SearchEngineFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$connection->expects( $this->any() )
 			->method( 'getSearchEngine' )
-			->will( $this->returnValue( $searchEngine ) );
+			->willReturn( $searchEngine );
 
 		$this->testEnvironment->addConfiguration( 'smwgFallbackSearchType', null );
 

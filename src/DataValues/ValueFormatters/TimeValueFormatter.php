@@ -283,8 +283,8 @@ class TimeValueFormatter extends DataValueFormatter {
 		}
 
 		return sprintf( "%02d", $dataItem->getHour() ) . ':' .
-		       sprintf( "%02d", $dataItem->getMinute() ) . ':' .
-		       sprintf( "%02d", $dataItem->getSecond() );
+			   sprintf( "%02d", $dataItem->getMinute() ) . ':' .
+			   sprintf( "%02d", $dataItem->getSecond() );
 	}
 
 	/**

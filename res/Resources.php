@@ -34,7 +34,6 @@ return [
 			'smw/ext.smw.dropdown.css',
 			'smw/ext.smw.table.css',
 			'smw/ext.smw.tabs.css',
-			'smw/factbox/smw.factbox.css',
 			'smw/smw.indicators.css',
 			'smw/smw.jsonview.css'
 		],
@@ -392,14 +391,35 @@ return [
 		]
 	],
 
-	// Facts and browse
-	'ext.smw.browse.styles' => $moduleTemplate + [
+	// Factbox styles
+	'ext.smw.factbox.styles' => $moduleTemplate + [
 		'styles' => [
-			'smw/ext.smw.table.css',
-			'smw/special/ext.smw.special.browse.less'
+			'smw/factbox.less'
 		],
 		'skinStyles' => [
-			'chameleon' => [ 'smw/special/ext.smw.special.browse.skin-chameleon.css' ]
+			'vector-2022' => [ 'smw/factbox-vector-2022.less' ]
+		],
+		'targets' => [
+			'mobile',
+			'desktop'
+		]
+	],
+
+	// Load sortable script for attachment table
+	'ext.smw.factbox' => $moduleTemplate + [
+		'packagedFiles' => [
+			'smw/ext.smw.factbox.js'
+		],
+		'targets' => [
+			'mobile',
+			'desktop'
+		]
+	],
+
+	// Special:Browse
+	'ext.smw.browse.styles' => $moduleTemplate + [
+		'styles' => [
+			'smw/special/ext.smw.special.browse.less'
 		],
 		'targets' => [
 			'mobile',
@@ -464,7 +484,7 @@ return [
 		'dependencies' => [
 			'smw.special.facetedsearch.styles',
 			'onoi.rangeslider',
-			//'vue'
+			// 'vue'
 		],
 		'targets' => [
 			'mobile',
@@ -604,13 +624,6 @@ return [
 		'targets' => [
 			'mobile',
 			'desktop'
-		]
-	],
-
-	'smw.factbox'  => $moduleTemplate + [
-		'scripts'  => [
-			'libs/tinysort/tinysort.min.js',
-			'smw/factbox/smw.factbox.js'
 		]
 	],
 

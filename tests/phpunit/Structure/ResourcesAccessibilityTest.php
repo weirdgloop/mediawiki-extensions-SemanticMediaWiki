@@ -17,7 +17,7 @@ use SMW\Tests\PHPUnitCompat;
  *
  * @author mwjames
  */
-class ResourcesAccessibilityTest extends \PHPUnit_Framework_TestCase {
+class ResourcesAccessibilityTest extends \PHPUnit\Framework\TestCase {
 
 	use PHPUnitCompat;
 
@@ -31,8 +31,8 @@ class ResourcesAccessibilityTest extends \PHPUnit_Framework_TestCase {
 		foreach ( array_keys( $modules ) as $name ) {
 			$resourceLoaderModule = $resourceLoader->getModule( $name );
 
-			$this->assertInternalType(
-				'string',
+			$this->assertIsString(
+
 				$resourceLoaderModule->getScript( $context )
 			);
 		}
@@ -50,7 +50,7 @@ class ResourcesAccessibilityTest extends \PHPUnit_Framework_TestCase {
 			$styles = $resourceLoaderModule->getStyles( $context );
 
 			foreach ( $styles as $style ) {
-				$this->assertInternalType( 'string', $style );
+				$this->assertIsString( $style );
 			}
 		}
 	}
