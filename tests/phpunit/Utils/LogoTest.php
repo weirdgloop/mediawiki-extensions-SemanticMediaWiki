@@ -2,14 +2,14 @@
 
 namespace SMW\Tests\Utils;
 
-use SMW\Utils\Logo;
 use SMW\Tests\PHPUnitCompat;
+use SMW\Utils\Logo;
 
 /**
  * @covers \SMW\Utils\Logo
  * @group semantic-mediawiki
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @since 3.1
  *
  * @author mwjames
@@ -26,8 +26,12 @@ class LogoTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGet_Footer() {
+		$fileName = version_compare( MW_VERSION, '1.43', '>=' )
+			? 'logo_footer.svg'
+			: 'logo_footer_legacy.svg';
+
 		$this->assertContains(
-			'assets/logo_footer.svg',
+			"assets/$fileName",
 			Logo::get( 'footer' )
 		);
 	}

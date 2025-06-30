@@ -2,9 +2,9 @@
 
 namespace SMW\MediaWiki\Jobs;
 
+use SMW\DIWikiPage;
 use SMW\MediaWiki\Job;
 use Title;
-use SMW\DIWikiPage;
 
 /**
  * Make sufficient use of the job table by only tracking remaining jobs without
@@ -15,7 +15,7 @@ use SMW\DIWikiPage;
  *
  * `MediaWikiServices::getInstance()->getJobQueueGroup()->get( 'SMW\ChangePropagationUpdateJob' )->getSize()`
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @since 3.0
  *
  * @author mwjames
@@ -54,7 +54,7 @@ class ChangePropagationUpdateJob extends Job {
 
 		$updateJob = new UpdateJob(
 			$this->getTitle(),
-			$this->params + [ 'origin' => 'ChangePropagationUpdateJob' ]
+			array_merge( $this->params, [ 'origin' => 'ChangePropagationUpdateJob' ] )
 		);
 
 		$updateJob->run();

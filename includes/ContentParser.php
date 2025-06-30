@@ -8,9 +8,9 @@ use MediaWiki\Revision\SlotRecord;
 use Parser;
 use ParserOptions;
 use RequestContext;
+use SMW\MediaWiki\RevisionGuardAwareTrait;
 use Title;
 use User;
-use SMW\MediaWiki\RevisionGuardAwareTrait;
 
 /**
  * Fetches the ParserOutput either by parsing an invoked text component,
@@ -19,7 +19,7 @@ use SMW\MediaWiki\RevisionGuardAwareTrait;
  *
  * @ingroup SMW
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @since 1.9
  *
  * @author mwjames
@@ -44,7 +44,7 @@ class ContentParser {
 	protected $errors = [];
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $skipInTextAnnotationParser = false;
 
@@ -73,7 +73,7 @@ class ContentParser {
 	 *
 	 * @return ContentParser
 	 */
-	public function setRevision( RevisionRecord $revision = null ) {
+	public function setRevision( ?RevisionRecord $revision = null ) {
 		$this->revision = $revision;
 		return $this;
 	}
@@ -118,22 +118,25 @@ class ContentParser {
 	 * @since 1.9
 	 *
 	 * @param string|null $text
+	 * @param bool $clear Whether to clear the parser cache.
 	 *
 	 * @return ContentParser
 	 */
-	public function parse( $text = null ) {
+	public function parse( ?string $text = null, bool $clear = true ) {
 		if ( $text !== null ) {
-			return $this->parseText( $text );
+			return $this->parseText( $text, $clear );
 		}
 
 		return $this->fetchFromContent();
 	}
 
-	private function parseText( $text ) {
+	private function parseText( ?string $text, bool $clear ) {
 		$this->parserOutput = $this->parser->parse(
 			$text,
 			$this->getTitle(),
-			$this->makeParserOptions()
+			$this->makeParserOptions(),
+			true,
+			$clear
 		);
 
 		return $this;

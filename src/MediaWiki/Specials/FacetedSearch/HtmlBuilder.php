@@ -2,15 +2,14 @@
 
 namespace SMW\MediaWiki\Specials\FacetedSearch;
 
-use Title;
+use SMW\Localizer\Message;
+use SMW\Localizer\MessageLocalizerTrait;
 use SMW\Utils\TemplateEngine;
 use SMW\Utils\UrlArgs;
-use SMW\Localizer\MessageLocalizerTrait;
-use SMW\Localizer\Message;
-use SMW\Utils\HtmlTabs;
+use Title;
 
 /**
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @since   3.2
  *
  * @author mwjames
@@ -187,7 +186,7 @@ class HtmlBuilder {
 			[
 				'action' => $title->getLocalUrl(),
 				'method' => 'get',
-				'q' => $urlArgs->get( 'q', '' ),
+				'q' => htmlspecialchars( $urlArgs->get( 'q', '' ) ),
 				'csum' => crc32( $urlArgs->get( 'q', '' ) ),
 				'limit' => $params['limit'],
 				'offset' => $params['offset'],
