@@ -421,7 +421,8 @@ return ( static function () {
 		#
 		# @since 1.0
 		##
-		'smwgShowFactboxEdit' => SMW_FACTBOX_NONEMPTY,
+		// WGL - No factboxes ever.
+		'smwgShowFactboxEdit' => SMW_FACTBOX_HIDDEN,
 		# #
 
 		###

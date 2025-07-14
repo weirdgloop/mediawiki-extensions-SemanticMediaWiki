@@ -44,9 +44,11 @@ class SkinAfterContent implements HookListener {
 	 * @return true
 	 */
 	public function performUpdate( &$data ) {
+		/* WGL - No factboxes ever.
 		if ( $this->canAddFactbox() ) {
 			$this->addFactboxTo( $data );
 		}
+		*/
 
 		return true;
 	}

@@ -101,7 +101,9 @@ class OutputPageParserOutput implements HookListener {
 			$this->indicatorRegistry->attachIndicators( $outputPage );
 		}
 
+		/* WGL - No factboxes ever.
 		$this->addFactbox( $outputPage, $parserOutput );
+		*/
 		$this->addPostProc( $title, $outputPage, $parserOutput );
 	}
 
