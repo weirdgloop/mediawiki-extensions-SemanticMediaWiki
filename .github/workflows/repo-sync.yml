@@ -30,6 +30,6 @@ jobs:
       if: env.changes_exist == 'true'
       with:
         source_branch: weirdgloop/repo-sync
-        destination_branch: weirdgloop/main
+        destination_branch: weirdgloop/main-rebase
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "Sync with upstream"
