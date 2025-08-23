@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Linker\Linker;
+use MediaWiki\MediaWikiServices;
 use SMW\Localizer\Localizer;
 use SMW\Site;
 
@@ -289,7 +291,8 @@ class SMWInfolink {
 				$titletext = $this->mTarget;
 			}
 
-			$title = Title::newFromText( $titletext );
+			$titleFactory = MediaWikiServices::getInstance()->getTitleFactory();
+			$title = $titleFactory->newFromText( $titletext );
 
 			if ( $title !== null ) {
 				if ( $outputformat == SMW_OUTPUT_WIKI ) {
@@ -304,7 +307,7 @@ class SMWInfolink {
 				// a direct URL link (only possible if offending target parts belong
 				// to some parameter that can be separated from title text, e.g.
 				// as in Special:Bla/il<leg>al -> Special:Bla&p=il&lt;leg&gt;al)
-				$title = Title::newFromText( $this->mTarget );
+				$title = $titleFactory->newFromText( $this->mTarget );
 
 				// Just give up due to the title being bad, normally this would
 				// indicate a software bug
@@ -387,7 +390,7 @@ class SMWInfolink {
 			return $this->buildTarget( $query );
 		}
 
-		$title = Title::newFromText( $this->mTarget );
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->newFromText( $this->mTarget );
 
 		if ( $title !== null ) {
 			return $title->getFullURL( $query );
@@ -413,7 +416,7 @@ class SMWInfolink {
 			return $this->buildTarget( $query );
 		}
 
-		$title = Title::newFromText( $this->mTarget );
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->newFromText( $this->mTarget );
 
 		if ( $title !== null ) {
 			return $title->getLocalURL( $query );
@@ -611,23 +614,23 @@ class SMWInfolink {
 	 * @return string
 	 */
 	public static function decodeCompactLink( $value ) {
-		if ( !is_string( $value ) || mb_substr( $value, 0, 3 ) !== 'cl:' ) {
+		if ( !is_string( $value ) || substr( $value, 0, 3 ) !== 'cl:' ) {
 			return $value;
 		}
 
-		$value = mb_substr( $value, 3 );
+		$value = substr( $value, 3 );
 
 		$value = base64_decode(
 			str_pad( strtr( str_replace( '.', '__', $value ), '-_', '+/' ), strlen( $value ) % 4, '=', STR_PAD_RIGHT )
 		);
 
 		// Compressed?
-		if ( mb_substr( $value, 0, 2 ) === 'c:' ) {
-			$val = @gzinflate( mb_substr( $value, 2 ) );
+		if ( substr( $value, 0, 2 ) === 'c:' ) {
+			$val = @gzinflate( substr( $value, 2 ) );
 
 			// Guessing that MediaWiki swallowed the last `_`
 			if ( $val === false ) {
-				$val = @gzinflate( mb_substr( $value, 2 ) . '?' );
+				$val = @gzinflate( substr( $value, 2 ) . '?' );
 			}
 
 			$value = $val;
