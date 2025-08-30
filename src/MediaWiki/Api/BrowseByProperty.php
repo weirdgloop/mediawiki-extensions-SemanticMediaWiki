@@ -29,6 +29,9 @@ class BrowseByProperty extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'params' => $this->getRequest()->getValues() ] );
+
 		$applicationFactory = ApplicationFactory::getInstance();
 
 		$propertyListByApiRequest = new PropertyListByApiRequest(

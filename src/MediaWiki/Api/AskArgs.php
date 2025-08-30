@@ -22,6 +22,8 @@ class AskArgs extends Query {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'params' => $this->getRequest()->getValues() ] );
 
 		$parameterFormatter = new ApiRequestParameterFormatter( $this->extractRequestParams() );
 		$outputFormat = 'json';

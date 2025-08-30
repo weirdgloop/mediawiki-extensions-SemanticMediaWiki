@@ -38,6 +38,8 @@ class BrowseBySubject extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'params' => $this->getRequest()->getValues() ] );
 
 		if ( isset( $params['type'] ) && $params['type'] === 'html' ) {
 			$data = $this->buildHTML( $params );

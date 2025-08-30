@@ -32,6 +32,8 @@ class Browse extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'params' => $this->getRequest()->getValues() ] );
 
 		$parameters = json_decode( $params['params'], true );
 		$res = [];
