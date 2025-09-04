@@ -198,7 +198,7 @@ class AskParserFunction {
 		}
 
 		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'function' => ( $this->showMode ) ? 'show' : 'ask', 'params' => $functionParams ] );
+		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'function' => ( $this->showMode ) ? 'show' : 'ask', 'function_params' => $functionParams ] );
 
 		$result = $this->doFetchResultsFromFunctionParameters(
 			$functionParams,
