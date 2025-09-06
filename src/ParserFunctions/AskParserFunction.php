@@ -197,9 +197,6 @@ class AskParserFunction {
 			$extraKeys[self::NO_TRACE] = true;
 		}
 
-		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage', '', 'private', [ 'function' => ( $this->showMode ) ? 'show' : 'ask', 'function_params' => $functionParams ] );
-
 		$result = $this->doFetchResultsFromFunctionParameters(
 			$functionParams,
 			$extraKeys

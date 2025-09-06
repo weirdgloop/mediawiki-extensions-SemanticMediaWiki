@@ -226,6 +226,9 @@ class SMWQueryProcessor implements QueryContext {
 	 * @return array( string, array( string => string ), array( \SMW\Query\PrintRequest ) )
 	 */
 	public static function getComponentsFromFunctionParams( array $rawParams, $showMode ) {
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'params' => array_map( 'strval', $rawParams ) ] );
+
 		/**
 		 * @var ParamListProcessor $paramListProcessor
 		 */
