@@ -227,7 +227,38 @@ class SMWQueryProcessor implements QueryContext {
 	 */
 	public static function getComponentsFromFunctionParams( array $rawParams, $showMode ) {
 		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'query_params' => array_value( array_map( 'strval', $rawParams ) ) ] );
+		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'query_params' => array_filter( array_map(
+			// Based on ParamListProcessor::preprocess()
+			function ( $name, $param ) {
+				// special handling for arrays - this can happen if the
+				// parameter came from a checkboxes input in Special:Ask:
+				if ( is_array( $param ) ) {
+					$param = implode( ',', array_keys( $param ) );
+				}
+
+				// Filtered out by array_filter afterwards.
+				if ( $param === null ) {
+					return null;
+				}
+
+				// Keep false as a non-empty string when cast below.
+				if ( $param === false ) {
+					$param = 0;
+				}
+				// BQ expects string value.
+				$param = (string)$param;
+
+				// #1258 (named_args -> named args)
+				// accept 'name' => 'value' just as '' => 'name=value':
+				if ( is_string( $name ) && ( $name !== '' ) ) {
+					$param = str_replace( '_', ' ', $name ) . '=' . $param;
+				}
+
+				return $param;
+			},
+			array_keys( $rawParams ),
+			array_values( $rawParams ),
+		), fn($v) => !is_null($v) && $v !== '' ) ] );
 
 		/**
 		 * @var ParamListProcessor $paramListProcessor
