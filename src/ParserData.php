@@ -91,6 +91,9 @@ class ParserData {
 	 */
 	private $canCreateUpdateJob = true;
 
+	// WGL - Only add SMW objects to ParserOutput if enabled for the title's namespace.
+	private $namespaceExaminer = null;
+
 	/**
 	 * Identifies the origin of a request.
 	 *
@@ -110,6 +113,8 @@ class ParserData {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function __construct( Title $title, ParserOutput $parserOutput ) {
+		// WGL - Only add SMW objects to ParserOutput if enabled for the title's namespace.
+		$this->namespaceExaminer = ApplicationFactory::getInstance()->getNamespaceExaminer();
 		$this->title = $title;
 		$this->parserOutput = $parserOutput;
 		$this->initSemanticData();
@@ -322,6 +327,11 @@ class ParserData {
 	 * @since 3.0
 	 */
 	public function copyToParserOutput() {
+		// WGL - Only add SMW objects to ParserOutput if enabled for the title's namespace.
+		if ( !$this->namespaceExaminer->isSemanticEnabled( $this->title->getNamespace() ) ) {
+			return;
+		}
+
 		// Ensure that errors are reported and recorded
 		$processingErrorMsgHandler = new ProcessingErrorMsgHandler(
 			$this->getSubject()
@@ -349,6 +359,11 @@ class ParserData {
 	 * @since 3.0
 	 */
 	public function markParserOutput() {
+		// WGL - Only add SMW objects to ParserOutput if enabled for the title's namespace.
+		if ( !$this->namespaceExaminer->isSemanticEnabled( $this->title->getNamespace() ) ) {
+			return;
+		}
+
 		if ( ApplicationFactory::getInstance()->getSettings()->get( 'smwgSetParserCacheTimestamp' ) ) {
 			$this->parserOutput->setTimestamp( wfTimestampNow() );
 		}
