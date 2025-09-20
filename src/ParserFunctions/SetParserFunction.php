@@ -85,6 +85,9 @@ class SetParserFunction {
 	 * @return string|null
 	 */
 	public function parse( ParserParameterProcessor $parameters ) {
+		// WGL - Logging SMW usage.
+		wfDebugLog( 'wgl-smw-usage-writes', '', 'private', [ 'function' => 'set', 'function_params' => $parameters->getRaw() ] );
+
 		$count = 0;
 		$template = '';
 		$subject = $this->parserData->getSemanticData()->getSubject();
