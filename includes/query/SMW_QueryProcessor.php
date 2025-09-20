@@ -227,7 +227,7 @@ class SMWQueryProcessor implements QueryContext {
 	 */
 	public static function getComponentsFromFunctionParams( array $rawParams, $showMode ) {
 		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'query_params' => array_filter( array_map(
+		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'query_params' => array_values( array_filter( array_map(
 			// Based on ParamListProcessor::preprocess()
 			function ( $name, $param ) {
 				// special handling for arrays - this can happen if the
@@ -258,7 +258,7 @@ class SMWQueryProcessor implements QueryContext {
 			},
 			array_keys( $rawParams ),
 			array_values( $rawParams ),
-		), fn($v) => !is_null($v) && $v !== '' ) ] );
+		), fn($v) => !is_null($v) ) ) ] );
 
 		/**
 		 * @var ParamListProcessor $paramListProcessor
