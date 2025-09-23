@@ -166,7 +166,8 @@ class ConceptParserFunction {
 			$rawParams,
 			SMW_OUTPUT_WIKI,
 			QueryProcessor::CONCEPT_DESC,
-			false
+			false,
+			$this->parserData->getTitle()
 		);
 
 		return $query;

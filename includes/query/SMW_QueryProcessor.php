@@ -225,7 +225,7 @@ class SMWQueryProcessor implements QueryContext {
 	 * @param bool $showMode
 	 * @return array( string, array( string => string ), array( \SMW\Query\PrintRequest ) )
 	 */
-	public static function getComponentsFromFunctionParams( array $rawParams, $showMode ) {
+	public static function getComponentsFromFunctionParams( array $rawParams, $showMode, $title = null ) {
 		// WGL - Logging SMW usage.
 		wfDebugLog( 'wgl-smw-usage-query', '', 'private', [ 'query_params' => array_values( array_filter( array_map(
 			// Based on ParamListProcessor::preprocess()
@@ -258,7 +258,7 @@ class SMWQueryProcessor implements QueryContext {
 			},
 			array_keys( $rawParams ),
 			array_values( $rawParams ),
-		), fn($v) => !is_null($v) ) ) ] );
+		), fn($v) => !is_null($v) ) ), 'title' => $title ] );
 
 		/**
 		 * @var ParamListProcessor $paramListProcessor
@@ -288,8 +288,8 @@ class SMWQueryProcessor implements QueryContext {
 	 * @param bool $showMode process like #show parser function?
 	 * @return array( SMWQuery, ProcessedParam[] )
 	 */
-	public static function getQueryAndParamsFromFunctionParams( array $rawParams, $outputMode, $context, $showMode, $contextPage = null ) {
-		[ $queryString, $params, $printouts ] = self::getComponentsFromFunctionParams( $rawParams, $showMode );
+	public static function getQueryAndParamsFromFunctionParams( array $rawParams, $outputMode, $context, $showMode, $title = null, $contextPage = null ) {
+		[ $queryString, $params, $printouts ] = self::getComponentsFromFunctionParams( $rawParams, $showMode, $title );
 
 		if ( !$showMode ) {
 			self::addThisPrintout( $printouts, $params );

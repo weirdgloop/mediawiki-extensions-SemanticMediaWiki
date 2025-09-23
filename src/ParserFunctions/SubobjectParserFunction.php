@@ -159,7 +159,11 @@ class SubobjectParserFunction {
 	 */
 	public function parse( ParserParameterProcessor $parameters ) {
 		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage-writes', '', 'private', [ 'function' => 'subobject', 'function_params' => $parameters->getRaw() ] );
+		wfDebugLog( 'wgl-smw-usage-writes', '', 'private', [
+			'function' => 'subobject',
+			'function_params' => $parameters->getRaw(),
+			'title' => $this->parserData->getTitle(),
+		] );
 
 		if (
 			$this->parserData->canUse() &&

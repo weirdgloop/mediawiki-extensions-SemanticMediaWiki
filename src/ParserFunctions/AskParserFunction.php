@@ -298,6 +298,7 @@ class AskParserFunction {
 			SMW_OUTPUT_WIKI,
 			$this->context,
 			$this->showMode,
+			$this->parserData->getTitle(),
 			$contextPage
 		);
 

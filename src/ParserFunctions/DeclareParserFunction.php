@@ -47,7 +47,11 @@ class DeclareParserFunction {
 	 */
 	public function parse( PPFrame $frame, array $args ) {
 		// WGL - Logging SMW usage.
-		wfDebugLog( 'wgl-smw-usage-writes', '', 'private', [ 'function' => 'declare', 'function_params' => [ (string)$frame ] ] );
+		wfDebugLog( 'wgl-smw-usage-writes', '', 'private', [
+			'function' => 'declare',
+			'function_params' => [ (string)$frame ],
+			'title' => $this->parserData->getTitle(),
+		] );
 
 		// @todo Save as metadata
 		if ( !$frame->isTemplate() ) {
