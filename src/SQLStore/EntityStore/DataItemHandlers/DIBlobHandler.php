@@ -118,10 +118,12 @@ class DIBlobHandler extends DataItemHandler {
 		$hash = $isKeyword ? $dataItem->normalize( $text ) : $this->makeHash( $text );
 
 		if ( $this->isDbType( 'postgres' ) ) {
-			$text = pg_escape_bytea( $text );
+			$connection = $this->store->getConnection( 'mw.db' );
+			$text = $connection->escape_bytea( $text );
 		}
 
-		if ( mb_strlen( $text ) <= $this->getMaxLength() && !$isKeyword ) {
+		// We need string length in bytes, not characters.
+		if ( strlen( $text ) <= $this->getMaxLength() && !$isKeyword ) {
 			$text = null;
 		}
 
@@ -160,7 +162,8 @@ class DIBlobHandler extends DataItemHandler {
 		}
 
 		if ( $this->isDbType( 'postgres' ) ) {
-			$dbkeys[0] = pg_unescape_bytea( $dbkeys[0] );
+			$connection = $this->store->getConnection( 'mw.db' );
+			$dbkeys[0] = $connection->unescape_bytea( $dbkeys[0] ?? '' );
 		}
 
 		// empty blob: use "hash" string
@@ -183,12 +186,12 @@ class DIBlobHandler extends DataItemHandler {
 	 */
 	private function makeHash( $string ) {
 		$length = $this->getMaxLength();
-
-		if ( mb_strlen( $string ) <= $length ) {
+		// We need to fit $string into a specified number of bytes, not characters.
+		if ( strlen( $string ) <= $length ) {
 			return $string;
 		}
-
-		return mb_substr( $string, 0, $length - 32 ) . md5( $string );
+		// Leave the first $length - 32 bytes (or less); replace the rest with a hash.
+		return mb_strcut( $string, 0, $length - 32 ) . md5( $string );
 	}
 
 	/**
